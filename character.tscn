@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://daugfea2xocd2"]
+
+[node name="Character" type="RigidBody2D"]
+lock_rotation = true
