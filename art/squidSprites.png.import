@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrp3lghnorrm"
-path="res://.godot/imported/squeed.png-3baa481ada9b8e24c227a9bd449d1cab.ctex"
+uid="uid://cfwbvjphdoynl"
+path="res://.godot/imported/squidSprites.png-7ad296281501f64ccbe1865a6ff6461a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://squeed.png"
-dest_files=["res://.godot/imported/squeed.png-3baa481ada9b8e24c227a9bd449d1cab.ctex"]
+source_file="res://art/squidSprites.png"
+dest_files=["res://.godot/imported/squidSprites.png-7ad296281501f64ccbe1865a6ff6461a.ctex"]
 
 [params]
 

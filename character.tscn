@@ -1,34 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://daugfea2xocd2"]
+[gd_scene load_steps=11 format=3 uid="uid://bcpp2gmgxfs7m"]
 
-[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://squidSprites.png" id="1_bt45o"]
 [ext_resource type="Script" path="res://character.gd" id="1_mdp3u"]
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_4smsi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]
 radius = 6.0
 height = 18.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cfvcn"]
-atlas = ExtResource("1_bt45o")
+atlas = ExtResource("2_4smsi")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqu2t"]
-atlas = ExtResource("1_bt45o")
+atlas = ExtResource("2_4smsi")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uic8c"]
-atlas = ExtResource("1_bt45o")
+atlas = ExtResource("2_4smsi")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_su6y7"]
-atlas = ExtResource("1_bt45o")
+atlas = ExtResource("2_4smsi")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_reydg"]
-atlas = ExtResource("1_bt45o")
+atlas = ExtResource("2_4smsi")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3bj4"]
-atlas = ExtResource("1_bt45o")
+atlas = ExtResource("2_4smsi")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qebdb"]
@@ -72,9 +72,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Character" type="RigidBody2D"]
+[node name="Character" type="CharacterBody2D"]
 position = Vector2(6, -18)
-lock_rotation = true
 script = ExtResource("1_mdp3u")
 metadata/_edit_group_ = true
 
