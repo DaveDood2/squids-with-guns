@@ -1,4 +1,90 @@
-[gd_scene format=3 uid="uid://daugfea2xocd2"]
+[gd_scene load_steps=11 format=3 uid="uid://daugfea2xocd2"]
+
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://squidSprites.png" id="1_bt45o"]
+[ext_resource type="Script" path="res://character.gd" id="1_mdp3u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfvcn"]
+atlas = ExtResource("1_bt45o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqu2t"]
+atlas = ExtResource("1_bt45o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uic8c"]
+atlas = ExtResource("1_bt45o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su6y7"]
+atlas = ExtResource("1_bt45o")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reydg"]
+atlas = ExtResource("1_bt45o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3bj4"]
+atlas = ExtResource("1_bt45o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qebdb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfvcn")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 50.0,
+"texture": SubResource("AtlasTexture_vqu2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uic8c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su6y7")
+}],
+"loop": true,
+"name": &"rise",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_reydg")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_n3bj4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [node name="Character" type="RigidBody2D"]
+position = Vector2(6, -18)
 lock_rotation = true
+script = ExtResource("1_mdp3u")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.537, -2.667)
+shape = SubResource("CapsuleShape2D_hk4p5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.205697, -2.81768)
+scale = Vector2(0.306072, 0.349447)
+sprite_frames = SubResource("SpriteFrames_qebdb")
+animation = &"idle"
+frame_progress = 0.0508703
