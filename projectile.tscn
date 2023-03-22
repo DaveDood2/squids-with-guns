@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4bl0i7q7y06l"]
+
+[ext_resource type="Script" path="res://projectile.gd" id="1_mmrrr"]
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_guy2h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ntwid"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng6tv"]
+atlas = ExtResource("2_guy2h")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3psfl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng6tv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Projectile" type="RigidBody2D"]
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("1_mmrrr")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ntwid")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_3psfl")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

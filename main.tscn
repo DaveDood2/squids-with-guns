@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmwo2waue3wcl"]
+[gd_scene load_steps=8 format=3 uid="uid://dmwo2waue3wcl"]
 
 [ext_resource type="PackedScene" uid="uid://bcpp2gmgxfs7m" path="res://character.tscn" id="1_3rx6c"]
+[ext_resource type="Script" path="res://main.gd" id="1_jl6h2"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_0e3ee"]
+[ext_resource type="PackedScene" uid="uid://c4bl0i7q7y06l" path="res://projectile.tscn" id="2_8xxrw"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="5_d7a3j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8102u"]
 texture = ExtResource("2_0e3ee")
@@ -347,12 +350,14 @@ terrain_set_0/terrain_1/color = Color(0.223529, 0.0470588, 0.341176, 1)
 sources/0 = SubResource("TileSetAtlasSource_8102u")
 
 [node name="Main" type="Node"]
+script = ExtResource("1_jl6h2")
 
 [node name="Character" parent="." instance=ExtResource("1_3rx6c")]
 position = Vector2(105, 85)
-health = null
-speed = null
-team = null
+projectile_scene = ExtResource("2_8xxrw")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
+remote_path = NodePath("../../Camera2D")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_acu8k")
@@ -373,3 +378,7 @@ layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 10
 layer_2/tile_data = PackedInt32Array()
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(105, 85)
+script = ExtResource("5_d7a3j")
