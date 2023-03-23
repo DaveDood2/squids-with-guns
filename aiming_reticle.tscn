@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dubmqifbobgck"]
+
+[ext_resource type="Script" path="res://aiming_reticle.gd" id="1_lae0r"]
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_mv77e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bv76"]
+atlas = ExtResource("2_mv77e")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f28ai"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bv76")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Aiming Reticle" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_lae0r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_f28ai")

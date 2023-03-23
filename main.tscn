@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmwo2waue3wcl"]
+[gd_scene load_steps=9 format=3 uid="uid://dmwo2waue3wcl"]
 
 [ext_resource type="PackedScene" uid="uid://bcpp2gmgxfs7m" path="res://character.tscn" id="1_3rx6c"]
 [ext_resource type="Script" path="res://main.gd" id="1_jl6h2"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_0e3ee"]
 [ext_resource type="PackedScene" uid="uid://c4bl0i7q7y06l" path="res://projectile.tscn" id="2_8xxrw"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="5_d7a3j"]
+[ext_resource type="PackedScene" uid="uid://dubmqifbobgck" path="res://aiming_reticle.tscn" id="6_l1ek2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8102u"]
 texture = ExtResource("2_0e3ee")
@@ -355,6 +356,7 @@ script = ExtResource("1_jl6h2")
 [node name="Character" parent="." instance=ExtResource("1_3rx6c")]
 position = Vector2(105, 85)
 projectile_scene = ExtResource("2_8xxrw")
+aim_reticle_scene = ExtResource("6_l1ek2")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character"]
 remote_path = NodePath("../../Camera2D")
