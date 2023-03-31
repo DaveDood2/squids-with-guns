@@ -21,7 +21,9 @@ animations = [{
 }]
 
 [node name="Projectile" type="CharacterBody2D"]
-collision_mask = 0
+scale = Vector2(0.25, 0.25)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_mmrrr")
 metadata/_edit_group_ = true
 
