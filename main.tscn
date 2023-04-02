@@ -349,6 +349,8 @@ terrain_set_0/terrain_0/name = "Temple"
 terrain_set_0/terrain_0/color = Color(0.945098, 0.678431, 0.0784314, 1)
 terrain_set_0/terrain_1/name = "Shadow1"
 terrain_set_0/terrain_1/color = Color(0.223529, 0.0470588, 0.341176, 1)
+custom_data_layer_0/name = "Durability"
+custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_8102u")
 
 [node name="Main" type="Node"]
