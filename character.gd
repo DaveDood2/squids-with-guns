@@ -6,10 +6,12 @@ extends CharacterBody2D
 
 signal create_attack
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 250.0
+const JUMP_VELOCITY = -350.0
 const JUMP_GRACE_PERIOD = 0.2 # Time in seconds to allow character to jump right after they slip off a ledge
 const WALL_SLIDE_VELOCITY = 50.0 # Speed in which the player moves down when sliding on walls
+const HIGH_GRAVITY_MODIFIER = 1.2 # How fast the player falls when they are not holding jump
+const LOW_GRAVITY_MODIFIER = 0.5 # How much to multiply the gravity by when the player holds the jump key
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -25,6 +27,12 @@ func _ready():
 	get_tree().get_current_scene().add_child.call_deferred(aim_reticle)
 
 func _physics_process(delta):
+	# Lessen the gravity if jump is held
+	if Input.is_action_pressed("jump"):
+		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * LOW_GRAVITY_MODIFIER
+	else:
+		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * HIGH_GRAVITY_MODIFIER
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta

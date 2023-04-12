@@ -25,8 +25,11 @@ func _physics_process(delta):
 		if collision.get_collider().name == "TileMap": #Destroying tilemap w/ bullets: https://www.reddit.com/r/godot/comments/i0pzf6/how_to_implement_destructible_tiles_in_godot/
 			var cell = tilemap.local_to_map(collision.get_position() - collision.get_normal())
 			var tile_data = tilemap.get_cell_tile_data(0, cell)
+			if (!tile_data):
+				print("Skipped")
+				queue_free()
 			var new_tile_health = tile_data.get_custom_data("Durability") - terrain_damage
-			print("Tile health: %s" % new_tile_health)
+			#print("Tile health: %s" % new_tile_health)
 			if (new_tile_health <= 0):
 				tilemap.set_cell(0, cell, -1)
 			else:
