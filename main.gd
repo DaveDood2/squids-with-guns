@@ -8,6 +8,5 @@ func _process(_delta):
 		print("[DEBUG] Reloaded scene!")
 		get_tree().reload_current_scene()
 	
-
 		
 

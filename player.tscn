@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://wq3ojp3ptbh5"]
+
+[ext_resource type="PackedScene" uid="uid://bcpp2gmgxfs7m" path="res://character.tscn" id="1_1ojei"]
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_ofvsl"]
+[ext_resource type="Script" path="res://player.gd" id="2_un7ip"]
+[ext_resource type="PackedScene" uid="uid://c4bl0i7q7y06l" path="res://projectile.tscn" id="3_74ijg"]
+[ext_resource type="PackedScene" uid="uid://dubmqifbobgck" path="res://aiming_reticle.tscn" id="4_4guem"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu743"]
+atlas = ExtResource("2_ofvsl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rsnt"]
+atlas = ExtResource("2_ofvsl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf6b4"]
+atlas = ExtResource("2_ofvsl")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rhw3q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu743")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rsnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf6b4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" instance=ExtResource("1_1ojei")]
+position = Vector2(10, -19)
+script = ExtResource("2_un7ip")
+projectile_scene = ExtResource("3_74ijg")
+aim_reticle_scene = ExtResource("4_4guem")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(-1, -2.452)
+scale = Vector2(0.3125, 0.329625)
+sprite_frames = SubResource("SpriteFrames_rhw3q")

@@ -1,0 +1,2 @@
+extends "character.gd"
+
