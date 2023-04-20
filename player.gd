@@ -1,10 +1,5 @@
 extends "character.gd"
 
-func _ready():
-	# Add this character's reticle to the main scene
-	aim_reticle = aim_reticle_scene.instantiate()
-	get_tree().get_current_scene().add_child.call_deferred(aim_reticle)
-
 func _physics_process(delta):
 	# Lessen the gravity if jump is held
 	if Input.is_action_pressed("jump"):

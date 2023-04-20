@@ -21,11 +21,16 @@ var attack_cooldown = 0 # Time in seconds before the next attack can be done
 var air_time = 0 # Time in seconds character is airborne
 var aim_reticle # This character's aim reticle that they can attack towards
 var health = 100.0 # How much punishment a character can take before they've had enough for the day
+var health_bar
 
 func _ready():
 	# Add this character's reticle to the main scene
 	aim_reticle = aim_reticle_scene.instantiate()
 	get_tree().get_current_scene().add_child.call_deferred(aim_reticle)
+	#Initialize health bar
+	health_bar = get_node("HealthBar")
+	health_bar.max_value = health
+	health_bar.value = health
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -41,7 +46,6 @@ func _physics_process(delta):
 			velocity.y = WALL_SLIDE_VELOCITY
 
 	move_and_slide()
-	
 
 func attack(emit_position = self.position):
 	# Create projectile
@@ -57,7 +61,8 @@ func attack(emit_position = self.position):
 
 func take_damage(damage_amount):
 	health -= damage_amount
-	if (health < 0):
+	health_bar.value = health
+	if (health <= 0):
 		perish()
 	
 func perish():
