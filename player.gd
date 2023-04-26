@@ -1,5 +1,10 @@
 extends "character.gd"
 
+func _ready():
+	super._ready()
+	team = "Player"
+	aim_reticle.follow_mouse = true
+
 func _physics_process(delta):
 	# Lessen the gravity if jump is held
 	if Input.is_action_pressed("jump"):
@@ -47,14 +52,3 @@ func _physics_process(delta):
 	else:
 		attack_cooldown -= delta
 
-func attack(emit_position = self.position):
-	# Create projectile
-	var projectile = projectile_scene.instantiate()
-	projectile.position = emit_position
-	
-	# Point towards aiming reticle
-	#projectile.look_at(aim_reticle.position)
-	projectile.aiming_reticle = aim_reticle
-	
-	#add projectile
-	get_tree().get_current_scene().add_child(projectile)

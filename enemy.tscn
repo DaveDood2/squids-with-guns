@@ -32,7 +32,6 @@ animations = [{
 position = Vector2(-81, -14)
 scale = Vector2(1.737, 1.737)
 collision_layer = 33
-collision_mask = 33
 script = ExtResource("2_a7yrn")
 projectile_scene = ExtResource("3_u6j65")
 aim_reticle_scene = ExtResource("4_3q7h1")
