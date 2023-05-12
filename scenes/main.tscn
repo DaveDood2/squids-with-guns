@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmwo2waue3wcl"]
+[gd_scene load_steps=8 format=3 uid="uid://b3gavv3focdi6"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_jl6h2"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_jl6h2"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_0e3ee"]
-[ext_resource type="PackedScene" uid="uid://wq3ojp3ptbh5" path="res://player.tscn" id="2_ing7c"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="5_d7a3j"]
-[ext_resource type="PackedScene" uid="uid://u4y2lfky60dr" path="res://enemy.tscn" id="7_7v13f"]
+[ext_resource type="PackedScene" uid="uid://ec4nu6wf50l7" path="res://scenes/player.tscn" id="2_ing7c"]
+[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="5_d7a3j"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="7_7v13f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8102u"]
 texture = ExtResource("2_0e3ee")

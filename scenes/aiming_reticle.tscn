@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dubmqifbobgck"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://aiming_reticle.gd" id="1_lae0r"]
+[ext_resource type="Script" path="res://scripts/aiming_reticle.gd" id="1_lae0r"]
 [ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_mv77e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bv76"]

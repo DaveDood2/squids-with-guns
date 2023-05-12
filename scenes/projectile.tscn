@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4bl0i7q7y06l"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://projectile.gd" id="1_mmrrr"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_mmrrr"]
 [ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_guy2h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntwid"]

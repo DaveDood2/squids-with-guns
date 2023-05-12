@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcpp2gmgxfs7m"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://character.gd" id="1_mdp3u"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_mdp3u"]
 [ext_resource type="Theme" uid="uid://bc16eqpjmb17a" path="res://progress_bar_theme.tres" id="2_uirjt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]

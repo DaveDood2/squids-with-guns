@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://u4y2lfky60dr"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" uid="uid://bcpp2gmgxfs7m" path="res://character.tscn" id="1_mjqpm"]
-[ext_resource type="Script" path="res://enemy.gd" id="2_a7yrn"]
-[ext_resource type="PackedScene" uid="uid://c4bl0i7q7y06l" path="res://projectile.tscn" id="3_u6j65"]
-[ext_resource type="PackedScene" uid="uid://dubmqifbobgck" path="res://aiming_reticle.tscn" id="4_3q7h1"]
+[ext_resource type="PackedScene" path="res://scenes/character.tscn" id="1_mjqpm"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="2_a7yrn"]
+[ext_resource type="PackedScene" path="res://scenes/projectile.tscn" id="3_u6j65"]
+[ext_resource type="PackedScene" path="res://scenes/aiming_reticle.tscn" id="4_3q7h1"]
 [ext_resource type="Texture2D" uid="uid://bpuybfk7ggu08" path="res://art/spubbSprites.png" id="5_3du4a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsdp5"]
