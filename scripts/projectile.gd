@@ -8,7 +8,7 @@ var character_damage := 25.0 # amount of damage this bullet does to players/enem
 var lifetime := 100.0 # Time in seconds that this projectile will last before despawning
 var aiming_reticle
 var tilemap
-const Character = preload("res://character.gd")
+const Character = preload("character.gd")
 var team = "" # The group that this projectile originated from (and will not hurt)
 var bullet_owner = -1 # The instance ID of the character that shot this bullet
 var friendly_fire := false # Whether or not this bullet can hurt its owner/teammates
@@ -56,5 +56,3 @@ func _physics_process(delta):
 			queue_free()
 	
 	
-#func _on_visible_on_screen_notifier_2d_screen_exited():
-#	queue_free()

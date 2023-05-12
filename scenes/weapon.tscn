@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://coniibtueenob"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_62koj"]
+[ext_resource type="PackedScene" uid="uid://cfdwink1eyr5s" path="res://scenes/projectile.tscn" id="2_im80s"]
+
+[node name="weapon" type="Node2D"]
+script = ExtResource("1_62koj")
+projectile_scene = ExtResource("2_im80s")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcpp2gmgxfs7m"]
+[gd_scene load_steps=4 format=3 uid="uid://bsagkrlojikxa"]
 
-[ext_resource type="Script" path="res://character.gd" id="1_mdp3u"]
-[ext_resource type="Theme" uid="uid://bc16eqpjmb17a" path="res://progress_bar_theme.tres" id="2_uirjt"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_rwugk"]
+[ext_resource type="Theme" uid="uid://bc16eqpjmb17a" path="res://progress_bar_theme.tres" id="2_jfmbr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]
 radius = 6.0
@@ -9,7 +9,7 @@ height = 13.334
 
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(6, -19)
-script = ExtResource("1_mdp3u")
+script = ExtResource("1_rwugk")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,5 +22,5 @@ offset_top = 7.0
 offset_right = 47.0
 offset_bottom = 15.0
 scale = Vector2(0.223198, 0.30671)
-theme = ExtResource("2_uirjt")
+theme = ExtResource("2_jfmbr")
 show_percentage = false

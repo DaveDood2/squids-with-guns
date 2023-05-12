@@ -17,6 +17,9 @@ const NO_TEAM = "NO_TEAM"
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var weapons = [] # The different types of projectile this character can shoot
+var selected_weapon = 0 # Index of currently selected weapon
+const Weapon = preload("weapon.gd")
 
 var attack_cooldown = 0 # Time in seconds before the next attack can be done
 var air_time = 0 # Time in seconds character is airborne
@@ -50,6 +53,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+
 func attack(emit_position = self.position):
 	# Create projectile
 	var projectile = projectile_scene.instantiate()
@@ -69,12 +73,30 @@ func attack(emit_position = self.position):
 	#add projectile
 	get_tree().get_current_scene().add_child(projectile)
 
+
 func take_damage(damage_amount):
 	health -= damage_amount
 	health_bar.value = health
 	if (health <= 0):
 		perish()
 	
+	
 func perish():
 	aim_reticle.queue_free()
 	queue_free()
+
+
+func get_closest_in_group(groupName):
+	var characters = get_tree().get_nodes_in_group(groupName)
+	var closest = null
+	var nearest_distance = INF
+	for character in characters:
+		var new_distance = position.distance_to(character.position)
+		if (new_distance < nearest_distance):
+			nearest_distance = new_distance
+			closest = character
+	return {"character": closest, "distance": nearest_distance}
+	
+	
+func give_weapon():
+	var new_weapon = Weapon.new()	

@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dubmqifbobgck"]
+[gd_scene load_steps=5 format=3 uid="uid://nk0kniuy557c"]
 
-[ext_resource type="Script" path="res://aiming_reticle.gd" id="1_lae0r"]
-[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_mv77e"]
+[ext_resource type="Script" path="res://scripts/aiming_reticle.gd" id="1_58dif"]
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_acrfn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bv76"]
-atlas = ExtResource("2_mv77e")
+atlas = ExtResource("2_acrfn")
 region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f28ai"]
@@ -20,7 +20,7 @@ animations = [{
 
 [node name="Aiming Reticle" type="Node2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_lae0r")
+script = ExtResource("1_58dif")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)

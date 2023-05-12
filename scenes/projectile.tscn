@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4bl0i7q7y06l"]
+[gd_scene load_steps=6 format=3 uid="uid://cfdwink1eyr5s"]
 
-[ext_resource type="Script" path="res://projectile.gd" id="1_mmrrr"]
-[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_guy2h"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_6agj0"]
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_ojmsv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntwid"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ng6tv"]
-atlas = ExtResource("2_guy2h")
+atlas = ExtResource("2_ojmsv")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3psfl"]
@@ -23,7 +23,7 @@ animations = [{
 [node name="Projectile" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
 collision_layer = 48
-script = ExtResource("1_mmrrr")
+script = ExtResource("1_6agj0")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
