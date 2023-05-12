@@ -9,9 +9,6 @@ var lifetime := 100.0 # Time in seconds that this projectile will last before de
 var aiming_reticle
 var tilemap
 const Character = preload("res://character.gd")
-var team = "" # The group that this projectile originated from (and will not hurt)
-var bullet_owner = -1 # The instance ID of the character that shot this bullet
-var friendly_fire := false # Whether or not this bullet can hurt its owner/teammates
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,17 +24,10 @@ func _physics_process(delta):
 	var collision = move_and_collide(veloc)
 	if collision:
 		var collider = collision.get_collider()
-		
 		#Bullet hit a character
 		if collider is Character:
-			#Check to make sure this isn't the bullet's owner nor a teammate
-			if ((friendly_fire == false)
-					and (collider.get_instance_id() != bullet_owner)
-					and (collider.team != team)
-			):
-				collider.take_damage(character_damage)
-				queue_free()
-			
+			collider.take_damage(character_damage)
+			queue_free()
 		#Bullet hit the terrain
 		elif collider.name == "TileMap": #Destroying tilemap w/ bullets: https://www.reddit.com/r/godot/comments/i0pzf6/how_to_implement_destructible_tiles_in_godot/
 			var cell = tilemap.local_to_map(collision.get_position() - collision.get_normal())
@@ -53,7 +43,7 @@ func _physics_process(delta):
 				else:
 					tile_data.set_custom_data("Durability", new_tile_health)
 				#print("Collision:" + tile_id)
-			queue_free()
+		queue_free()
 	
 	
 #func _on_visible_on_screen_notifier_2d_screen_exited():
