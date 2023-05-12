@@ -100,5 +100,6 @@ func get_closest_in_group(groupName):
 	
 	
 func give_weapon():
+	var new_weapon = weapon_scene.new()
+	weapons.append(new_weapon)
 	return
-	#var new_weapon = Weapon.new()	

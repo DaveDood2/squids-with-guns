@@ -1,15 +1,21 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://vw6crpxqhsw"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_mdp3u"]
+[ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="2_8ixyd"]
 [ext_resource type="Theme" uid="uid://bc16eqpjmb17a" path="res://progress_bar_theme.tres" id="2_uirjt"]
+[ext_resource type="PackedScene" uid="uid://t6x1ne8soadk" path="res://scenes/aiming_reticle.tscn" id="3_o6duk"]
+[ext_resource type="PackedScene" uid="uid://bernbd4l83uw2" path="res://scenes/weapon.tscn" id="4_w873w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]
 radius = 6.0
 height = 13.334
 
-[node name="Character" type="CharacterBody2D"]
+[node name="Character" type="CharacterBody2D" groups=["Character"]]
 position = Vector2(6, -19)
 script = ExtResource("1_mdp3u")
+projectile_scene = ExtResource("2_8ixyd")
+aim_reticle_scene = ExtResource("3_o6duk")
+weapon_scene = ExtResource("4_w873w")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
