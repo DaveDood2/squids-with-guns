@@ -19,7 +19,7 @@ const NO_TEAM = "NO_TEAM"
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var weapons = [] # The different types of projectile this character can shoot
-var selected_weapon = 0 # Index of currently selected weapon
+var selected_weapon = -1 # Index of currently selected weapon
 
 
 var attack_cooldown = 0 # Time in seconds before the next attack can be done
@@ -38,6 +38,7 @@ func _ready():
 	health_bar = get_node("HealthBar")
 	health_bar.max_value = health
 	health_bar.value = health
+	add_weapon()
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -74,6 +75,9 @@ func attack(emit_position = self.position):
 	#add projectile
 	get_tree().get_current_scene().add_child(projectile)
 
+func attack2(emit_position = self.position):
+	weapons[selected_weapon].shoot()
+	return
 
 func take_damage(damage_amount):
 	health -= damage_amount
@@ -99,7 +103,8 @@ func get_closest_in_group(groupName):
 	return {"character": closest, "distance": nearest_distance}
 	
 	
-func give_weapon():
-	var new_weapon = weapon_scene.new()
+func add_weapon():
+	var new_weapon = Weapon.new()
 	weapons.append(new_weapon)
+	selected_weapon += 1
 	return

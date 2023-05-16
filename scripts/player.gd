@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 	
 	if Input.is_action_pressed("attack") and attack_cooldown <= 0:
-		attack()
+		attack2()
 		attack_cooldown = 0.1
 	else:
 		attack_cooldown -= delta
