@@ -39,11 +39,9 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-
-	
-	if Input.is_action_pressed("attack") and attack_cooldown <= 0:
-		attack2()
-		attack_cooldown = 0.1
+	# attacking
+	if (Input.is_action_pressed("attack")) and (attack_cooldown <= 0):
+		attack_cooldown = attack2()
 	else:
 		attack_cooldown -= delta
 

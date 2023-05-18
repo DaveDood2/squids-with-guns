@@ -13,11 +13,14 @@ var tilemap
 var team = "" # The group that this projectile originated from (and will not hurt)
 var bullet_owner = -1 # The instance ID of the character that shot this bullet
 var friendly_fire := false # Whether or not this bullet can hurt its owner/teammates
+var look_at_position
+var ready_bullet # the function to call on doing ready
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	look_at(aiming_reticle.position)
+	#look_at(aiming_reticle.position)
 	tilemap = get_parent().get_node("TileMap")
+	ready_bullet.call(look_at_position)
 
 func _physics_process(delta):
 	if (lifetime < 0):

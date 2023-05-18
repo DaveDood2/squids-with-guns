@@ -424,7 +424,6 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("2_ing7c")]
 position = Vector2(89, 76)
-weapon_scene = null
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 position = Vector2(-6, 19)
@@ -435,4 +434,3 @@ position = Vector2(83, 95)
 script = ExtResource("5_d7a3j")
 
 [node name="Enemy" parent="." instance=ExtResource("7_7v13f")]
-weapon_scene = null

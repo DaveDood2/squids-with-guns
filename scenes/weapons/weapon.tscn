@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://drnhbv0yvqulv"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_hm042"]
+[ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="2_2x7sm"]
+
+[node name="weapon" type="Node2D" groups=["weapon"]]
+script = ExtResource("1_hm042")
+projectile_scene = ExtResource("2_2x7sm")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+
+[node name="ReloadBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
