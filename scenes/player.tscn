@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ec4nu6wf50l7"]
+[gd_scene load_steps=9 format=3 uid="uid://ec4nu6wf50l7"]
 
-[ext_resource type="PackedScene" uid="uid://vw6crpxqhsw" path="res://scenes/character.tscn" id="1_1ojei"]
+[ext_resource type="PackedScene" path="res://scenes/character.tscn" id="1_1ojei"]
 [ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/squidSprites.png" id="2_ofvsl"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_un7ip"]
+[ext_resource type="PackedScene" uid="uid://fxq61yn2m12b" path="res://scenes/weapons/shotgun.tscn" id="3_5524a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hu743"]
 atlas = ExtResource("2_ofvsl")
@@ -36,6 +37,7 @@ animations = [{
 [node name="Player" groups=["Player"] instance=ExtResource("1_1ojei")]
 position = Vector2(10, -19)
 script = ExtResource("2_un7ip")
+weapon_scene = ExtResource("3_5524a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(-1, -2.452)

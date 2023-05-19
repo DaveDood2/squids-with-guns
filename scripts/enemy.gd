@@ -20,7 +20,7 @@ func _physics_process(delta):
 
 	if (state == "attacking"):
 		if attack_cooldown <= 0:
-			attack()
+			#attack()
 			attack_cooldown = 0.1
 			var target = get_closest_in_group("Player").character
 			if (!is_instance_valid(target)):

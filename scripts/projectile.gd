@@ -14,20 +14,22 @@ var team = "" # The group that this projectile originated from (and will not hur
 var bullet_owner = -1 # The instance ID of the character that shot this bullet
 var friendly_fire := false # Whether or not this bullet can hurt its owner/teammates
 var look_at_position
-var ready_bullet # the function to call on doing ready
+var spread = 0 # amount in degrees this bullet randomly turn before traveling
+var parent_velocity = Vector2() # parent's velocity gets added to bullet (e.g., running and shooting forwards yields faster bullet) 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#look_at(aiming_reticle.position)
 	tilemap = get_parent().get_node("TileMap")
-	ready_bullet.call(look_at_position)
+	look_at(look_at_position)
+	rotate(randf_range(-spread/2.0, spread/2.0))
 
 func _physics_process(delta):
 	if (lifetime < 0):
 		queue_free()
 	lifetime -= delta
 	#look_at(get_global_mouse_position())
-	var veloc = Vector2.RIGHT.rotated(rotation) * speed * delta
+	var veloc = (Vector2.RIGHT.rotated(rotation) * speed * delta) + (parent_velocity * 0.01)
 	var collision = move_and_collide(veloc)
 	if collision:
 		var collider = collision.get_collider()

@@ -56,26 +56,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func attack(emit_position = self.position):
-	# Create projectile
-	var projectile = projectile_scene.instantiate()
-	projectile.position = emit_position
-	
-	# Point towards aiming reticle
-	#projectile.look_at(aim_reticle.position)
-	projectile.aiming_reticle = aim_reticle
-	
-	# Set projectile's team & owner
-	projectile.team = team
-	projectile.bullet_owner = get_instance_id()
-	
-	# Modify projectile so it does not collide with this character
-	projectile.add_collision_exception_with(self)
-	
-	#add projectile
-	get_tree().get_current_scene().add_child(projectile)
 
-func attack2(emit_position = self.position):
+func attack(emit_position = self.position):
 	selected_weapon.shoot(emit_position)
 	var attack_cooldown = selected_weapon.cooldown
 	return attack_cooldown

@@ -41,18 +41,6 @@ func _physics_process(delta):
 	
 	# attacking
 	if (Input.is_action_pressed("attack")) and (attack_cooldown <= 0):
-		attack_cooldown = attack2()
+		attack_cooldown = attack()
 	else:
 		attack_cooldown -= delta
-
-func attack(emit_position = self.position):
-	# Create projectile
-	var projectile = projectile_scene.instantiate()
-	projectile.position = emit_position
-	
-	# Point towards aiming reticle
-	#projectile.look_at(aim_reticle.position)
-	projectile.aiming_reticle = aim_reticle
-	
-	#add projectile
-	get_tree().get_current_scene().add_child(projectile)
