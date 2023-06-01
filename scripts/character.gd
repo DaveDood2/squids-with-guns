@@ -84,11 +84,25 @@ func get_closest_in_group(groupName):
 			nearest_distance = new_distance
 			closest = character
 	return {"character": closest, "distance": nearest_distance}
+
+
+func _on_reload_started():
+	return
+	
+	
+func _on_reload_finished():
+	return	
 	
 	
 func add_weapon():
 	var new_weapon = weapon_scene.instantiate()
 	new_weapon.aim_reticle = aim_reticle
+	new_weapon.weapon_owner = get_instance_id()
+	new_weapon.owner_collision_layer = 5 if get_collision_layer_value(5) else 6
+	new_weapon.reload_started.connect(_on_reload_started)
+	new_weapon.reload_finished.connect(_on_reload_finished)
 	add_child(new_weapon)
 	selected_weapon = new_weapon
 	return
+
+
