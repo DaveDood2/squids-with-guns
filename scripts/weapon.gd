@@ -31,12 +31,10 @@ func _ready():
 
 func shoot(emit_position):
 	if (current_ammo > 0): # still has ammo & not on cooldown
-		print("Shot weapon")
 		current_ammo -= 1
 		for x in range(0, bullet_amount):
 			spawn_bullet(emit_position)
-	elif ((current_ammo <= 0) and (not is_reloading)): # no more ammo
-		print("Reloading")
+	if ((current_ammo <= 0) and (not is_reloading)): # no more ammo or just ran out
 		reload_timer.start(reload_time)
 		is_reloading = true
 		
@@ -53,11 +51,8 @@ func spawn_bullet(emit_position):
 	projectile.ignore_collision_layer = owner_collision_layer
 	get_tree().get_current_scene().add_child(projectile)
 	
-func test(input):
-	print("wowzers: ", input, self)
 
 func _on_reload_timer_timeout():
-	print("Finished reloading")
 	current_ammo = max_ammo
 	is_reloading = false
 	reload_timer.stop()

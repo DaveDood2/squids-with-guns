@@ -1,13 +1,15 @@
 extends "character.gd"
 
 var state = "idle"
-var search_radius = 150.0
+var search_radius = 400.0
+var navigator
 
 func _ready():
 	super._ready()
 	team = "Enemy"
 	aim_reticle.follow_mouse = false
 	aim_reticle.follow_players = true
+	navigator = get_node("NavigationAgent2D")
 
 func _physics_process(delta):
 	super._physics_process(delta)
@@ -20,16 +22,32 @@ func _physics_process(delta):
 
 	if (state == "attacking"):
 		if attack_cooldown <= 0:
-			attack()
-			attack_cooldown = 0.1
-			var target = get_closest_in_group("Player").character
-			if (!is_instance_valid(target)):
-				state = "idle"
+			attack_cooldown = 0 #attack()
+			var target = get_closest_in_group("Player")
+			if (is_instance_valid(target.character)):
+				aim_reticle.assign_target(target.character)
+				chase(target.character.position)
 			else:
-				aim_reticle.assign_target(target)
+				state = "idle"
 		else:
 			attack_cooldown -= delta
 
 func take_damage(amount):
 	super.take_damage(amount)
 	state = "attacking"
+	
+func chase(target):
+	# Based on code from: https://www.youtube.com/watch?v=lOS2SptNiBM
+	navigator.target_position = target
+	if (navigator.is_target_reachable()):
+		var next_location = navigator.get_next_path_position()
+		var direction = global_position.direction_to(next_location)
+		if direction.y < 0:
+			handle_jump()
+		if direction:
+			velocity.x = direction.x * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		move_and_slide()
+
+

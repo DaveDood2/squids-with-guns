@@ -21,7 +21,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var weapons = [] # The different types of projectile this character can shoot
 var selected_weapon # Index of currently selected weapon
 
-
+var wants_to_jump = false # Whether or not this character is trying to jump currently
 var attack_cooldown = 0 # Time in seconds before the next attack can be done
 var air_time = 0 # Time in seconds character is airborne
 var aim_reticle # This character's aim reticle that they can attack towards
@@ -47,7 +47,7 @@ func _physics_process(delta):
 	else:
 		air_time = 0
 
-	# Handle Wall Sliding/Wall Jumps
+	# Handle Wall Sliding
 	if is_on_wall_only():
 		# Wall Slide
 		if velocity.y > 0:
@@ -105,4 +105,14 @@ func add_weapon():
 	selected_weapon = new_weapon
 	return
 
+func handle_jump():
+	# Handle Jump.
+	if is_on_floor() or air_time < JUMP_GRACE_PERIOD:
+		velocity.y = JUMP_VELOCITY
+		air_time = JUMP_GRACE_PERIOD
+
+	# Handle Wall Jumps
+	if is_on_wall_only():
+		# Wall Jump
+		velocity.y = JUMP_VELOCITY
 
