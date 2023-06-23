@@ -32,7 +32,6 @@ position = Vector2(-81, -14)
 scale = Vector2(1.737, 1.737)
 collision_layer = 32
 script = ExtResource("2_a7yrn")
-avoidance_radius = 100.0
 weapon_scene = ExtResource("3_q6rxb")
 
 [node name="CollisionShape2D" parent="." index="0"]

@@ -3,7 +3,6 @@ extends "character.gd"
 var state = "idle"
 var search_radius = 400.0
 var navigator
-@export var avoidance_radius = 10.0
 
 func _ready():
 	super._ready()
@@ -11,8 +10,6 @@ func _ready():
 	aim_reticle.follow_mouse = false
 	aim_reticle.follow_players = true
 	navigator = get_node("NavigationAgent2D")
-	navigator.set_radius(avoidance_radius)
-	navigator.set_avoidance_enabled(true)
 
 func _physics_process(delta):
 	super._physics_process(delta)
