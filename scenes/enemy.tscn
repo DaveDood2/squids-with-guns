@@ -35,8 +35,8 @@ script = ExtResource("2_a7yrn")
 weapon_scene = ExtResource("3_q6rxb")
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(-0.537, 2.381)
-scale = Vector2(0.846, 0.577)
+position = Vector2(-0.458, 4.082)
+scale = Vector2(0.603, 0.577)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(-0.388, -1)
@@ -45,6 +45,8 @@ sprite_frames = SubResource("SpriteFrames_kbobg")
 animation = &"idle"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="3"]
+path_desired_distance = 10.0
+target_desired_distance = 30.0
 path_max_distance = 200.0
 debug_enabled = true
 debug_use_custom = true

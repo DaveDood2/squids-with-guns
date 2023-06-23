@@ -64,8 +64,13 @@ attack={
 [layer_names]
 
 2d_physics/layer_1="Terrain"
+2d_navigation/layer_1="air"
 2d_physics/layer_5="Player"
 2d_physics/layer_6="Enemy"
+
+[navigation]
+
+2d/default_edge_connection_margin=20
 
 [rendering]
 
