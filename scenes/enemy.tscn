@@ -36,8 +36,8 @@ avoidance_radius = 100.0
 weapon_scene = ExtResource("3_q6rxb")
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(-0.537, 2.381)
-scale = Vector2(0.846, 0.577)
+position = Vector2(-0.537, 2.773)
+scale = Vector2(0.493, 0.335)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(-0.388, -1)

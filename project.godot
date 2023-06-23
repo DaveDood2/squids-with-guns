@@ -67,6 +67,10 @@ attack={
 2d_physics/layer_5="Player"
 2d_physics/layer_6="Enemy"
 
+[navigation]
+
+2d/default_edge_connection_margin=16
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

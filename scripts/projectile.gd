@@ -59,6 +59,7 @@ func _physics_process(delta):
 				#print("Tile health: %s" % new_tile_health)
 				if (new_tile_health <= 0):
 					tilemap.set_cell(0, cell, 0, Vector2(4,5))
+					#tilemap.set_cell(0, cell, -1)
 				else:
 					tile_data.set_custom_data("Durability", new_tile_health)
 				#print("Collision:" + tile_id)

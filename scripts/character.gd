@@ -59,7 +59,7 @@ func _physics_process(delta):
 
 func attack(emit_position = self.position):
 	selected_weapon.shoot(emit_position)
-	var attack_cooldown = selected_weapon.cooldown
+	attack_cooldown = selected_weapon.cooldown
 	return attack_cooldown
 
 func take_damage(damage_amount):
