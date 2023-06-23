@@ -35,8 +35,13 @@ script = ExtResource("2_a7yrn")
 weapon_scene = ExtResource("3_q6rxb")
 
 [node name="CollisionShape2D" parent="." index="0"]
+<<<<<<< Updated upstream
 position = Vector2(-0.458, 4.082)
 scale = Vector2(0.603, 0.577)
+=======
+position = Vector2(0, 3.687)
+scale = Vector2(0.375, 0.351)
+>>>>>>> Stashed changes
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(-0.388, -1)

@@ -27,6 +27,8 @@ var air_time = 0 # Time in seconds character is airborne
 var aim_reticle # This character's aim reticle that they can attack towards
 var health = 100.0 # How much punishment a character can take before they've had enough for the day
 var health_bar
+var wall_cling_right
+var wall_cling_left
 
 var team = NO_TEAM # This character's team (e.g., teamed characters can't usually hurt each other)
 
@@ -39,6 +41,8 @@ func _ready():
 	health_bar.max_value = health
 	health_bar.value = health
 	add_weapon()
+	wall_cling_right = get_node("WallClingRight")
+	wall_cling_left = get_node("WallClingLeft")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -48,14 +52,19 @@ func _physics_process(delta):
 		air_time = 0
 
 	# Handle Wall Sliding
-	if is_on_wall_only():
+	if is_touching_wall():
 		# Wall Slide
 		if velocity.y > 0:
 			velocity.y = WALL_SLIDE_VELOCITY
 
 	move_and_slide()
 
-
+func is_touching_wall():
+	if wall_cling_right.is_colliding():
+		return true
+	if wall_cling_left.is_colliding():
+		return true
+	return false
 
 func attack(emit_position = self.position):
 	selected_weapon.shoot(emit_position)
@@ -112,7 +121,7 @@ func handle_jump():
 		air_time = JUMP_GRACE_PERIOD
 
 	# Handle Wall Jumps
-	if is_on_wall_only():
+	if is_touching_wall():
 		# Wall Jump
 		velocity.y = JUMP_VELOCITY
 

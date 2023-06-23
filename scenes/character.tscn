@@ -31,3 +31,9 @@ offset_bottom = 15.0
 scale = Vector2(0.223198, 0.30671)
 theme = ExtResource("2_uirjt")
 show_percentage = false
+
+[node name="WallClingRight" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
+
+[node name="WallClingLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-11, 0)
