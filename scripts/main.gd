@@ -1,5 +1,10 @@
 extends Node
 
+@export var navigation_region: NavigationRegion2D
+@export var tilemap: TileMap
+
+func _ready():
+	build_navigation_region()
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
@@ -9,4 +14,5 @@ func _process(_delta):
 		get_tree().reload_current_scene()
 	
 		
-
+func build_navigation_region():
+	return
