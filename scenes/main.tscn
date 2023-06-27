@@ -408,12 +408,9 @@ custom_data_layer_0/name = "Durability"
 custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_8102u")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ax0f7"]
-vertices = PackedVector2Array(-807, -579, 1165, -520, 1166, 539, -805, 543)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-807, -579, 1165, -520, 1166, 539, -805, 543)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_5x1bc"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("navigation_region", "tilemap")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("navigation_region", "tilemap")]
 script = ExtResource("1_jl6h2")
 navigation_region = NodePath("NavigationRegion2D")
 tilemap = NodePath("TileMap")
@@ -441,18 +438,18 @@ layer_2/z_index = 10
 layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("2_ing7c")]
-position = Vector2(591, 7)
+position = Vector2(591, 15)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 position = Vector2(-6, 19)
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(585, 26)
+position = Vector2(585, 34)
 script = ExtResource("5_d7a3j")
 
 [node name="Enemy" parent="." instance=ExtResource("7_7v13f")]
 position = Vector2(975, -133)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_ax0f7")
+navigation_polygon = SubResource("NavigationPolygon_5x1bc")
