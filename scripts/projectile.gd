@@ -18,6 +18,7 @@ var spread = 0 # amount in degrees this bullet randomly turn before traveling
 var parent_velocity = Vector2() # parent's velocity gets added to bullet (e.g., running and shooting forwards yields faster bullet) 
 var ignore_collision_layer = -1 # Which collision layer to ignore (5 for player 6 for enemy)
 var parent_sway_modifier := 0.25 # How much the shooter's momentum affects this bullet
+const EMPTY_TILE_COORDS = Vector2i(4, 5)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +30,7 @@ func _ready():
 
 func _physics_process(delta):
 	if (lifetime < 0):
-		queue_free()
+		perish()
 	lifetime -= delta
 	#look_at(get_global_mouse_position())
 	var veloc = (Vector2.RIGHT.rotated(rotation) * speed * delta) + (parent_velocity * delta * parent_sway_modifier)
@@ -45,7 +46,7 @@ func _physics_process(delta):
 					and (collider.team != team)
 			):
 				collider.take_damage(character_damage)
-				queue_free()
+				perish()
 			
 		#Bullet hit the terrain
 		elif collider.name == "TileMap": #Destroying tilemap w/ bullets: https://www.reddit.com/r/godot/comments/i0pzf6/how_to_implement_destructible_tiles_in_godot/
@@ -53,15 +54,18 @@ func _physics_process(delta):
 			var tile_data = tilemap.get_cell_tile_data(0, cell)
 			if (!tile_data):
 				print("Skipped")
-				queue_free()
+				perish()
 			else:
 				var new_tile_health = tile_data.get_custom_data("Durability") - terrain_damage
 				#print("Tile health: %s" % new_tile_health)
 				if (new_tile_health <= 0):
-					tilemap.set_cell(0, cell, -1)
+					print("normally i'd break a tile here")
+					tilemap.set_cell(0, cell, 0, EMPTY_TILE_COORDS)
 				else:
-					tile_data.set_custom_data("Durability", new_tile_health)
+					tilemap.set_cell(0, cell, 0, EMPTY_TILE_COORDS)
+					#tile_data.set_custom_data("Durability", new_tile_health)
 				#print("Collision:" + tile_id)
-			queue_free()
+			perish()
 	
-	
+func perish():
+	queue_free()

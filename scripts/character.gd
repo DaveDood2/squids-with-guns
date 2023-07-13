@@ -4,8 +4,7 @@ extends CharacterBody2D
 @export var aim_reticle_scene: PackedScene
 @export var weapon_scene: PackedScene
 
-
-signal create_attack
+signal die
 
 const SPEED = 250.0
 const JUMP_VELOCITY = -350.0
@@ -79,8 +78,11 @@ func take_damage(damage_amount):
 	
 	
 func perish():
-	aim_reticle.queue_free()
-	queue_free()
+	if (is_instance_valid(aim_reticle)):
+		aim_reticle.queue_free()
+	if (is_instance_valid(self)):
+		queue_free()
+		die.emit(team)
 
 
 func get_closest_in_group(groupName):

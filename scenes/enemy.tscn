@@ -51,3 +51,5 @@ path_max_distance = 200.0
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0.247059, 0.639216, 1)
+
+[connection signal="die" from="." to="." method="_on_character_died"]

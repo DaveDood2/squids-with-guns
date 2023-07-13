@@ -6,7 +6,8 @@ const EMPTY_TILE_COORDS = Vector2i(4, 5)
 const TILE_SIZE = 16.0
 
 func _ready():
-	build_navigation_region()
+	pass
+	#build_navigation_region()
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
@@ -15,8 +16,16 @@ func _process(_delta):
 		print("[DEBUG] Reloaded scene!")
 		get_tree().reload_current_scene()
 	
-		
+	
 func build_navigation_region():
+	var maps = NavigationServer2D.get_maps()
+	var regions_count = 0
+	for map in maps:
+		regions_count += 1
+		print("Map: ", map, " RIDS:", NavigationServer2D.map_get_regions(map))
+	print("Total regions: ", regions_count)
+		
+'''func build_navigation_region():
 	var navigation_outline = PackedVector2Array()
 	var navigation_polygon = NavigationPolygon.new()
 	for i in tilemap.get_used_cells(0):
@@ -34,3 +43,11 @@ func build_navigation_region():
 	navigation_region.navigation_polygon = navigation_polygon
 	print("Polygons:", navigation_polygon.get_polygon_count())
 	return
+'''
+
+
+
+func _on_world_boundary_body_exited(body):
+	if (body.is_in_group("Character")):
+		print("OOB:", body.name)
+		body.perish()

@@ -9,6 +9,7 @@ func _ready():
 	team = "Enemy"
 	aim_reticle.follow_mouse = false
 	aim_reticle.follow_players = true
+	aim_reticle.position = position
 	navigator = get_node("NavigationAgent2D")
 
 func _physics_process(delta):
@@ -22,7 +23,7 @@ func _physics_process(delta):
 
 	if (state == "attacking"):
 		if attack_cooldown <= 0:
-			attack_cooldown = 0 #attack()
+			attack()
 			var target = get_closest_in_group("Player")
 			if (is_instance_valid(target.character)):
 				aim_reticle.assign_target(target.character)
@@ -49,5 +50,8 @@ func chase(target):
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		move_and_slide()
+
+
+
 
 
