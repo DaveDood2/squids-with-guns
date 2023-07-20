@@ -81,8 +81,9 @@ func perish():
 	if (is_instance_valid(aim_reticle)):
 		aim_reticle.queue_free()
 	if (is_instance_valid(self)):
-		queue_free()
+		print("Emitting death signal:", team)
 		die.emit(team)
+		queue_free()
 
 
 func get_closest_in_group(groupName):

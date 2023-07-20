@@ -1,5 +1,11 @@
 extends "character.gd"
 
+func _ready():
+	super._ready()
+	health = 1000
+	health_bar.max_value = health
+	health_bar.value = health
+
 func _physics_process(delta):
 	super._physics_process(delta)
 	
@@ -17,8 +23,10 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
+		$AnimatedSprite2D.play("default")
 		velocity.x = direction * SPEED
 	else:
+		$AnimatedSprite2D.stop()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()

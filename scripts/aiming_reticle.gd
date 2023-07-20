@@ -5,7 +5,7 @@ extends Node2D
 var rotation_speed = 3
 var follow_mouse = true
 var follow_players = false
-var move_towards_players_speed = 200.0
+var move_towards_players_speed = 400.0
 var target = null
 
 # Called when the node enters the scene tree for the first time.

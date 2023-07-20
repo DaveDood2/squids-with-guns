@@ -5,6 +5,8 @@ extends Node2D
 const EMPTY_TILE_COORDS = Vector2i(4, 5)
 const TILE_SIZE = 16.0
 
+signal increment_score
+
 func _ready():
 	pass
 	#build_navigation_region()
@@ -51,3 +53,5 @@ func _on_world_boundary_body_exited(body):
 	if (body.is_in_group("Character")):
 		print("OOB:", body.name)
 		body.perish()
+		if (body.name == "Enemy"):
+			increment_score.emit()

@@ -1,37 +1,50 @@
 extends "character.gd"
 
-var state = "idle"
+var state = "parachuting"
 var search_radius = 400.0
 var navigator
+var parachute_fall_modifier := 0.05
 
 func _ready():
 	super._ready()
 	team = "Enemy"
 	aim_reticle.follow_mouse = false
 	aim_reticle.follow_players = true
+	aim_reticle.visible = false
 	aim_reticle.position = position
 	navigator = get_node("NavigationAgent2D")
 
 func _physics_process(delta):
-	super._physics_process(delta)
-
-	if (state == "idle"):
-		var nearest_player = get_closest_in_group("Player")
-		if (nearest_player.distance <= search_radius):
-			state = "attacking"
-			aim_reticle.assign_target(nearest_player.character)
-
-	if (state == "attacking"):
-		if attack_cooldown <= 0:
-			attack()
-			var target = get_closest_in_group("Player")
-			if (is_instance_valid(target.character)):
-				aim_reticle.assign_target(target.character)
-				chase(target.character.position)
+	match(state):
+		"parachuting":
+			if not is_on_floor():
+				velocity.y += gravity * delta * parachute_fall_modifier
+				move_and_slide()
 			else:
 				state = "idle"
-		else:
-			attack_cooldown -= delta
+
+		"idle":
+			super._physics_process(delta)
+			var nearest_player = get_closest_in_group("Player")
+			if (nearest_player.distance <= search_radius):
+				state = "attacking"
+				aim_reticle.assign_target(nearest_player.character)
+
+		"attacking":
+			super._physics_process(delta)
+			if attack_cooldown <= 0:
+				attack()
+				var target = get_closest_in_group("Player")
+				if (is_instance_valid(target.character)):
+					aim_reticle.assign_target(target.character)
+					chase(target.character.position)
+				else:
+					state = "idle"
+			else:
+				attack_cooldown -= delta
+			
+		_:
+			printerr("Invalid state:", state)
 
 func take_damage(amount):
 	super.take_damage(amount)
@@ -46,8 +59,10 @@ func chase(target):
 		if direction.y < 0:
 			handle_jump()
 		if direction:
+			$AnimatedSprite2D2.play("idle")
 			velocity.x = direction.x * SPEED
 		else:
+			$AnimatedSprite2D2.stop()
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		move_and_slide()
 

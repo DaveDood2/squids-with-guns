@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3gavv3focdi6"]
+[gd_scene load_steps=17 format=3 uid="uid://b3gavv3focdi6"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jl6h2"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_0e3ee"]
 [ext_resource type="PackedScene" uid="uid://ec4nu6wf50l7" path="res://scenes/player.tscn" id="2_ing7c"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="5_d7a3j"]
 [ext_resource type="PackedScene" uid="uid://bxhbqb8ylcbr" path="res://scenes/hud.tscn" id="6_ah7i0"]
+[ext_resource type="PackedScene" uid="uid://3i585uceg2gk" path="res://scenes/enemy_spawner.tscn" id="7_2u21o"]
 [ext_resource type="PackedScene" uid="uid://dtmumrb38daei" path="res://scenes/enemy.tscn" id="7_7v13f"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j4ckn"]
@@ -600,7 +601,7 @@ position = Vector2(585, 34)
 script = ExtResource("5_d7a3j")
 
 [node name="Enemy" parent="." instance=ExtResource("7_7v13f")]
-position = Vector2(975, -133)
+position = Vector2(975, -187)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
@@ -620,4 +621,9 @@ shape = SubResource("RectangleShape2D_guugy")
 
 [node name="HUD" parent="." instance=ExtResource("6_ah7i0")]
 
+[node name="EnemySpawner" parent="." instance=ExtResource("7_2u21o")]
+
+[connection signal="increment_score" from="." to="HUD" method="_on_main_increment_score"]
+[connection signal="increment_score" from="." to="EnemySpawner" method="_on_main_increment_score"]
+[connection signal="die" from="Enemy" to="HUD" method="_on_enemy_die"]
 [connection signal="body_exited" from="WorldBoundary" to="." method="_on_world_boundary_body_exited"]
