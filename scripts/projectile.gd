@@ -59,7 +59,6 @@ func _physics_process(delta):
 				var new_tile_health = tile_data.get_custom_data("Durability") - terrain_damage
 				#print("Tile health: %s" % new_tile_health)
 				if (new_tile_health <= 0):
-					print("normally i'd break a tile here")
 					tilemap.set_cell(0, cell, 0, EMPTY_TILE_COORDS)
 				else:
 					tilemap.set_cell(0, cell, 0, EMPTY_TILE_COORDS)

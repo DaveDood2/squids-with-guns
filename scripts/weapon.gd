@@ -28,12 +28,27 @@ var sway := 0.1 # How much the shooter's momentum affects the bullet's initial v
 func _ready():
 	current_ammo = max_ammo
 	reload_timer = get_node("ReloadTimer")
+	$GunSprite.play("idle")
+	
+func _physics_process(delta):
+	draw_gun()
+
+func draw_gun():
+	$GunSprite.look_at(aim_reticle.position)
+	var rot = rad_to_deg((aim_reticle.position - $GunSprite.global_position).angle())
+	if (rot >= -90 and rot <= 90):
+		$GunSprite.flip_v = 0
+	else:
+		$GunSprite.flip_v = 1
 
 func shoot(emit_position):
 	if (current_ammo > 0): # still has ammo & not on cooldown
 		current_ammo -= 1
+		$GunSprite.play("shooting")
+		play_sfx("shoot")
 		for x in range(0, bullet_amount):
-			spawn_bullet(emit_position)
+			#spawn_bullet(emit_position)
+			spawn_bullet($GunSprite/BulletSpawnPoint.global_position)
 	if ((current_ammo <= 0) and (not is_reloading)): # no more ammo or just ran out
 		reload_timer.start(reload_time)
 		is_reloading = true
@@ -57,6 +72,22 @@ func _on_reload_timer_timeout():
 	is_reloading = false
 	reload_timer.stop()
 
+func play_sfx(sound_effect):
+	var pitch = randf_range(0.8, 1.2)
+	match sound_effect:
+		"shoot":
+			$GunSfx.pitch_scale = pitch
+			$GunSfx.play()
+		_:
+			printerr("Unknown sound effect:", sound_effect)
+	
+	
 
 func _on_reload_finished():
 	pass # Replace with function body.
+
+func _on_gun_sprite_animation_finished():
+	if (is_reloading):
+		$GunSprite.play("reloading")
+	else:
+		$GunSprite.play("idle")

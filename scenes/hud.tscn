@@ -8,3 +8,7 @@ script = ExtResource("1_yesf0")
 [node name="Score" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Game_Over" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

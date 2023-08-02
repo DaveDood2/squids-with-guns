@@ -6,6 +6,7 @@ const EMPTY_TILE_COORDS = Vector2i(4, 5)
 const TILE_SIZE = 16.0
 
 signal increment_score
+signal game_over
 
 func _ready():
 	pass
@@ -55,3 +56,5 @@ func _on_world_boundary_body_exited(body):
 		body.perish()
 		if (body.name == "Enemy"):
 			increment_score.emit()
+		if (body.name == "Player"):
+			game_over.emit()

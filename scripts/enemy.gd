@@ -17,6 +17,7 @@ func _ready():
 func _physics_process(delta):
 	match(state):
 		"parachuting":
+			$AnimatedSprite2D.play("parachuting")
 			if not is_on_floor():
 				velocity.y += gravity * delta * parachute_fall_modifier
 				move_and_slide()
@@ -24,6 +25,7 @@ func _physics_process(delta):
 				state = "idle"
 
 		"idle":
+			$AnimatedSprite2D.play("idle")
 			super._physics_process(delta)
 			var nearest_player = get_closest_in_group("Player")
 			if (nearest_player.distance <= search_radius):
@@ -31,6 +33,7 @@ func _physics_process(delta):
 				aim_reticle.assign_target(nearest_player.character)
 
 		"attacking":
+			$AnimatedSprite2D.play("hostile")
 			super._physics_process(delta)
 			if attack_cooldown <= 0:
 				attack()
@@ -48,7 +51,8 @@ func _physics_process(delta):
 
 func take_damage(amount):
 	super.take_damage(amount)
-	state = "attacking"
+	if (state == "idle"):
+		state = "attacking"
 	
 func chase(target):
 	# Based on code from: https://www.youtube.com/watch?v=lOS2SptNiBM
@@ -59,10 +63,8 @@ func chase(target):
 		if direction.y < 0:
 			handle_jump()
 		if direction:
-			$AnimatedSprite2D2.play("idle")
 			velocity.x = direction.x * SPEED
 		else:
-			$AnimatedSprite2D2.stop()
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		move_and_slide()
 

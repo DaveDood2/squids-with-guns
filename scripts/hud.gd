@@ -7,7 +7,7 @@ func increase_score(amount):
 	update_score()
 
 func update_score():
-	$Score.text = "Spubbs bested: {score}".format({"score":current_score})
+	$Score.text = " Spubbs bested: {score}".format({"score":current_score})
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,11 +19,10 @@ func _process(delta):
 	pass
 
 
-func _on_enemy_die():
-	print("slain a spubb!")
-	increase_score(1)
-
-
 func _on_main_increment_score():
 	print("slain a spubb!!!")
 	increase_score(1)
+
+
+func _on_main_game_over():
+	pass # Replace with function body.

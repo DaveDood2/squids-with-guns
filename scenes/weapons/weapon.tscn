@@ -1,7 +1,119 @@
-[gd_scene load_steps=3 format=3 uid="uid://drnhbv0yvqulv"]
+[gd_scene load_steps=20 format=3 uid="uid://drnhbv0yvqulv"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_hm042"]
 [ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="2_2x7sm"]
+[ext_resource type="Texture2D" uid="uid://k4r7oycdddjh" path="res://art/weapons/bananaGun.png" id="3_ivelc"]
+[ext_resource type="Texture2D" uid="uid://dbr8wn71rpoav" path="res://art/weapons/banana.png" id="4_3qf4s"]
+[ext_resource type="AudioStream" uid="uid://3mdsmvuu1d26" path="res://sfx/523687__bendyboi__suction-pop.wav" id="5_784q6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmn6e"]
+atlas = ExtResource("3_ivelc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycro0"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oq6uy"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0pat"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57rcd"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nss52"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15wcp"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahj3r"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3yxq"]
+atlas = ExtResource("4_3qf4s")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke0hn"]
+atlas = ExtResource("3_ivelc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0onk"]
+atlas = ExtResource("3_ivelc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_785ud"]
+atlas = ExtResource("3_ivelc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kysvs"]
+atlas = ExtResource("3_ivelc")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1pit"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmn6e")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_ycro0")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_oq6uy")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_k0pat")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_57rcd")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_nss52")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_15wcp")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_ahj3r")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_y3yxq")
+}],
+"loop": false,
+"name": &"reloading",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_ke0hn")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_t0onk")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_785ud")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_kysvs")
+}],
+"loop": false,
+"name": &"shooting",
+"speed": 5.0
+}]
 
 [node name="weapon" type="Node2D" groups=["weapon"]]
 script = ExtResource("1_hm042")
@@ -13,4 +125,16 @@ projectile_scene = ExtResource("2_2x7sm")
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="GunSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e1pit")
+animation = &"shooting"
+offset = Vector2(14, 3)
+
+[node name="BulletSpawnPoint" type="Node2D" parent="GunSprite"]
+position = Vector2(21, 0)
+
+[node name="GunSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_784q6")
+
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="animation_finished" from="GunSprite" to="." method="_on_gun_sprite_animation_finished"]
