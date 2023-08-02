@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dunr2beyrvfp0"]
+[gd_scene load_steps=7 format=3 uid="uid://dunr2beyrvfp0"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_mmrrr"]
 [ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/characters/squidSprites.png" id="2_guy2h"]
+[ext_resource type="AudioStream" uid="uid://dynnfj3mjdjqh" path="res://sfx/pistolHit.wav" id="3_7cskl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntwid"]
 
@@ -33,3 +34,7 @@ shape = SubResource("CircleShape2D_ntwid")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_3psfl")
+
+[node name="HitTileSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7cskl")
+volume_db = -1.501

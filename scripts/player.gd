@@ -36,3 +36,10 @@ func _physics_process(delta):
 		attack_cooldown = attack()
 	else:
 		attack_cooldown -= delta
+		
+	# swapping weapons
+	if (Input.is_action_just_pressed("next_weapon")):
+		next_weapon()
+	if (Input.is_action_just_pressed("prev_weapon")):
+		prev_weapon()
+	

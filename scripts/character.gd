@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var projectile_scene: PackedScene
 @export var aim_reticle_scene: PackedScene
-@export var weapon_scene: PackedScene
+@export var weapons: Array[PackedScene] # The different types of projectile this character can shoot
 
 signal die
 
@@ -17,8 +17,8 @@ const NO_TEAM = "NO_TEAM"
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var weapons = [] # The different types of projectile this character can shoot
-var selected_weapon # Index of currently selected weapon
+var selected_weapon # Parent node of currently selected weapon
+var selected_weapon_index = 0
 
 var wants_to_jump = false # Whether or not this character is trying to jump currently
 var attack_cooldown = 0 # Time in seconds before the next attack can be done
@@ -39,7 +39,7 @@ func _ready():
 	health_bar = get_node("HealthBar")
 	health_bar.max_value = health
 	health_bar.value = health
-	add_weapon()
+	add_weapons()
 	wall_cling_right = get_node("WallClingRight")
 	wall_cling_left = get_node("WallClingLeft")
 
@@ -96,26 +96,35 @@ func get_closest_in_group(groupName):
 			nearest_distance = new_distance
 			closest = character
 	return {"character": closest, "distance": nearest_distance}
-
-
-func _on_reload_started():
-	return
 	
+func add_weapons():
+	for weapon in weapons:
+		add_weapon(weapon)
 	
-func _on_reload_finished():
-	return	
-	
-	
-func add_weapon():
+func add_weapon(weapon_scene):
 	var new_weapon = weapon_scene.instantiate()
 	new_weapon.aim_reticle = aim_reticle
 	new_weapon.weapon_owner = get_instance_id()
 	new_weapon.owner_collision_layer = 5 if get_collision_layer_value(5) else 6
-	new_weapon.reload_started.connect(_on_reload_started)
-	new_weapon.reload_finished.connect(_on_reload_finished)
 	add_child(new_weapon)
+	select_weapon(new_weapon)
+	
+func select_weapon(new_weapon):
+	var weapon_list = get_children()
+	for weapon in weapon_list:
+		if (weapon.is_in_group("weapon")):
+			if (weapon != new_weapon):
+				weapon.set_enabled(false)
+	new_weapon.set_enabled(true)
 	selected_weapon = new_weapon
-	return
+	
+func next_weapon():
+	selected_weapon_index = (selected_weapon_index + 1) % weapons.size()
+	select_weapon(weapons[selected_weapon_index])
+	
+func prev_weapon():
+	selected_weapon_index = (selected_weapon_index - 1) % weapons.size()
+	select_weapon(weapons[selected_weapon_index])
 
 func handle_jump():
 	# Handle Jump.

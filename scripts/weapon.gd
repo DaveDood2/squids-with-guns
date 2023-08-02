@@ -50,8 +50,7 @@ func shoot(emit_position):
 			#spawn_bullet(emit_position)
 			spawn_bullet($GunSprite/BulletSpawnPoint.global_position)
 	if ((current_ammo <= 0) and (not is_reloading)): # no more ammo or just ran out
-		reload_timer.start(reload_time)
-		is_reloading = true
+		start_reload()
 		
 func spawn_bullet(emit_position):
 	var projectile = projectile_scene.instantiate()
@@ -66,6 +65,10 @@ func spawn_bullet(emit_position):
 	projectile.ignore_collision_layer = owner_collision_layer
 	get_tree().get_current_scene().add_child(projectile)
 	
+func start_reload():
+	if (current_ammo < max_ammo):
+		reload_timer.start(reload_time)
+		is_reloading = true
 
 func _on_reload_timer_timeout():
 	current_ammo = max_ammo
@@ -91,3 +94,11 @@ func _on_gun_sprite_animation_finished():
 		$GunSprite.play("reloading")
 	else:
 		$GunSprite.play("idle")
+
+func set_enabled(enabled):
+	set_physics_process(enabled)
+	if (enabled):
+		show()
+	else:
+		start_reload()
+		hide()

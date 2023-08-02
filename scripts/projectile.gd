@@ -50,6 +50,7 @@ func _physics_process(delta):
 			
 		#Bullet hit the terrain
 		elif collider.name == "TileMap": #Destroying tilemap w/ bullets: https://www.reddit.com/r/godot/comments/i0pzf6/how_to_implement_destructible_tiles_in_godot/
+			play_sfx("hit_tile")
 			var cell = tilemap.local_to_map(collision.get_position() - collision.get_normal())
 			var tile_data = tilemap.get_cell_tile_data(0, cell)
 			if (!tile_data):
@@ -68,3 +69,12 @@ func _physics_process(delta):
 	
 func perish():
 	queue_free()
+	
+func play_sfx(sound_effect):
+	var pitch = randf_range(0.8, 1.2)
+	match sound_effect:
+		"hit_tile":
+			$HitTileSfx.pitch_scale = pitch
+			$HitTileSfx.play()
+		_:
+			printerr("Unknown sound effect:", sound_effect)
