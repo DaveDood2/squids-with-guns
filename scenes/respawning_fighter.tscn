@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp0x3icsg8vs5"]
+
+[ext_resource type="PackedScene" uid="uid://dtmumrb38daei" path="res://scenes/enemy.tscn" id="1_bmwyl"]
+[ext_resource type="Script" path="res://scripts/respawning_fighter.gd" id="2_yrvtm"]
+[ext_resource type="SpriteFrames" uid="uid://bsx1oerxpk223" path="res://art/characters/spubb_sprites.tres" id="3_okigh"]
+
+[node name="Respawning Fighter" instance=ExtResource("1_bmwyl")]
+script = ExtResource("2_yrvtm")
+projectile_scene = null
+aim_reticle_scene = null
+weapons = Array[PackedScene]([])
+
+[node name="AnimatedSprite2D" parent="." index="6"]
+sprite_frames = ExtResource("3_okigh")
+animation = &"hostile"

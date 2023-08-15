@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d35soy7t7vehu"]
+
+[ext_resource type="PackedScene" uid="uid://dtmumrb38daei" path="res://scenes/enemy.tscn" id="1_bmwyl"]
+[ext_resource type="Script" path="res://scripts/Respawning Fighter.gd" id="2_7lq4p"]
+
+[node name="Respawning Fighter" instance=ExtResource("1_bmwyl")]
+script = ExtResource("2_7lq4p")

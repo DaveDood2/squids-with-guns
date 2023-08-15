@@ -45,7 +45,7 @@ func shoot(emit_position):
 	if (current_ammo > 0): # still has ammo & not on cooldown
 		current_ammo -= 1
 		$GunSprite.play("shooting")
-		play_sfx("shoot")
+		$SFX/shoot.play()
 		for x in range(0, bullet_amount):
 			#spawn_bullet(emit_position)
 			spawn_bullet($GunSprite/BulletSpawnPoint.global_position)
@@ -74,16 +74,6 @@ func _on_reload_timer_timeout():
 	current_ammo = max_ammo
 	is_reloading = false
 	reload_timer.stop()
-
-func play_sfx(sound_effect):
-	var pitch = randf_range(0.8, 1.2)
-	match sound_effect:
-		"shoot":
-			$GunSfx.pitch_scale = pitch
-			$GunSfx.play()
-		_:
-			printerr("Unknown sound effect:", sound_effect)
-	
 	
 
 func _on_reload_finished():

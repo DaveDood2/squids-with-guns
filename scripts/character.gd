@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
+@export var animations: SpriteFrames
 @export var projectile_scene: PackedScene
 @export var aim_reticle_scene: PackedScene
 @export var weapons: Array[PackedScene] # The different types of projectile this character can shoot
+@export var team = NO_TEAM # This character's team (e.g., teamed characters can't usually hurt each other)
 
 signal die
 
@@ -25,23 +27,20 @@ var attack_cooldown = 0 # Time in seconds before the next attack can be done
 var air_time = 0 # Time in seconds character is airborne
 var aim_reticle # This character's aim reticle that they can attack towards
 var health = 100.0 # How much punishment a character can take before they've had enough for the day
+var max_health = health
 var health_bar
-var wall_cling_right
-var wall_cling_left
 
-var team = NO_TEAM # This character's team (e.g., teamed characters can't usually hurt each other)
 
 func _ready():
+	$AnimatedSprite2D.sprite_frames = animations
 	# Add this character's reticle to the main scene
 	aim_reticle = aim_reticle_scene.instantiate()
 	get_tree().get_current_scene().add_child.call_deferred(aim_reticle)
-	#Initialize health bar
+	# Initialize health bar
 	health_bar = get_node("HealthBar")
 	health_bar.max_value = health
 	health_bar.value = health
 	add_weapons()
-	wall_cling_right = get_node("WallClingRight")
-	wall_cling_left = get_node("WallClingLeft")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -59,9 +58,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func is_touching_wall():
-	if wall_cling_right.is_colliding():
+	if $WallClingRight.is_colliding():
 		return true
-	if wall_cling_left.is_colliding():
+	if $WallClingLeft.is_colliding():
 		return true
 	return false
 
@@ -74,8 +73,10 @@ func take_damage(damage_amount):
 	health -= damage_amount
 	health_bar.value = health
 	if (health <= 0):
-		perish()
+		play_death_animation()
 	
+func play_death_animation():
+	perish()
 	
 func perish():
 	if (is_instance_valid(aim_reticle)):
@@ -85,12 +86,23 @@ func perish():
 		die.emit(team)
 		queue_free()
 
-
-func get_closest_in_group(groupName):
+func get_closest_in_group(groupName, living_things_only = true, check_same_team_only = false):
 	var characters = get_tree().get_nodes_in_group(groupName)
 	var closest = null
 	var nearest_distance = INF
 	for character in characters:
+		if (living_things_only):
+			# Check if living
+			if (not character.is_in_group("Living")):
+				continue
+		# Check for teams
+		if (check_same_team_only):
+			# Only check for characters on our team
+			if (character.team != team):
+				continue
+		elif (character.team == team):
+			# Only check for characters on other teams
+			continue
 		var new_distance = position.distance_to(character.position)
 		if (new_distance < nearest_distance):
 			nearest_distance = new_distance

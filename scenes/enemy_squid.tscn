@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://clo5xgxpcjp3n"]
+
+[ext_resource type="PackedScene" uid="uid://dtmumrb38daei" path="res://scenes/enemy.tscn" id="1_vxyqv"]
+[ext_resource type="SpriteFrames" uid="uid://dunss7ay2cspq" path="res://art/characters/squid_sprites.tres" id="2_gad0s"]
+
+[node name="Enemy Squid" instance=ExtResource("1_vxyqv")]
+collision_layer = 16
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(-0.388, 6)
+scale = Vector2(0.3, 0.3)
+sprite_frames = ExtResource("2_gad0s")

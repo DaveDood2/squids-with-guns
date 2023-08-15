@@ -1,84 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://dtmumrb38daei"]
+[gd_scene load_steps=7 format=3 uid="uid://dtmumrb38daei"]
 
 [ext_resource type="PackedScene" uid="uid://bpdvjwncytche" path="res://scenes/character.tscn" id="1_mjqpm"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="2_a7yrn"]
-[ext_resource type="Texture2D" uid="uid://bpuybfk7ggu08" path="res://art/characters/spubbSprites.png" id="5_3du4a"]
+[ext_resource type="AudioStream" uid="uid://b5do0fwqrg3v1" path="res://sfx/characters/spubb/spubb_pain/spubb_pain1.wav" id="4_tgyfj"]
+[ext_resource type="AudioStream" uid="uid://lr4rhbd7hvpq" path="res://sfx/characters/spubb/spubb_pain/spubb_pain2.wav" id="5_ihhfk"]
+[ext_resource type="AudioStream" uid="uid://b8vcfaklqjwam" path="res://sfx/characters/spubb/spubb_pain/spubb_pain3.wav" id="6_6gtwh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7eosl"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(0, 0, 29, 29)
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jk0oa"]
+streams_count = 3
+random_pitch = 1.29
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("4_tgyfj")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_ihhfk")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_6gtwh")
+stream_2/weight = 1.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rd027"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(29, 0, 29, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wg6wd"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(29, 29, 29, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jigf2"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(0, 29, 29, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rsdp5"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(0, 0, 29, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cbheb"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(29, 0, 29, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cnt3t"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(0, 58, 29, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cyofc"]
-atlas = ExtResource("5_3du4a")
-region = Rect2(29, 58, 29, 29)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kbobg"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7eosl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rd027")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wg6wd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jigf2")
-}],
-"loop": true,
-"name": &"hostile",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rsdp5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cbheb")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cnt3t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cyofc")
-}],
-"loop": true,
-"name": &"parachuting",
-"speed": 5.0
-}]
-
-[node name="Enemy" groups=["Enemy"] instance=ExtResource("1_mjqpm")]
+[node name="Fighter" groups=["Enemy", "Living"] instance=ExtResource("1_mjqpm")]
 position = Vector2(-81, -14)
 collision_layer = 32
 script = ExtResource("2_a7yrn")
@@ -87,26 +26,25 @@ script = ExtResource("2_a7yrn")
 position = Vector2(0, 11)
 scale = Vector2(0.61, 0.571)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(-0.388, -1)
-sprite_frames = SubResource("SpriteFrames_kbobg")
-animation = &"idle"
-
-[node name="HealthBar" parent="." index="2"]
+[node name="HealthBar" parent="." index="1"]
 offset_top = 15.0
 offset_bottom = 23.0
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="3"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="2"]
 path_desired_distance = 10.0
 target_desired_distance = 30.0
 path_max_distance = 200.0
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0.247059, 0.639216, 1)
 
-[node name="WallClingRight" parent="." index="4"]
+[node name="WallClingRight" parent="." index="3"]
 position = Vector2(0, 11)
 
-[node name="WallClingLeft" parent="." index="5"]
+[node name="WallClingLeft" parent="." index="4"]
 position = Vector2(0, 11)
+
+[node name="death" type="AudioStreamPlayer2D" parent="SFX" index="0"]
+stream = SubResource("AudioStreamRandomizer_jk0oa")
+volume_db = -2.91
 
 [connection signal="die" from="." to="." method="_on_character_died"]

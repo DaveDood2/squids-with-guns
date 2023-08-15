@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://drnhbv0yvqulv" path="res://scenes/weapons/weapon.tscn" id="4_w873w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]
-radius = 3.50263
+radius = 3.50262
 height = 7.00525
 
 [node name="Character" type="CharacterBody2D" groups=["Character"]]
@@ -17,7 +17,7 @@ collision_layer = 0
 script = ExtResource("1_mdp3u")
 projectile_scene = ExtResource("2_8ixyd")
 aim_reticle_scene = ExtResource("3_o6duk")
-weapons = [ExtResource("4_1ipvp"), ExtResource("4_w873w")]
+weapons = Array[PackedScene]([ExtResource("4_1ipvp"), ExtResource("4_w873w")])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -38,3 +38,7 @@ target_position = Vector2(11, 0)
 
 [node name="WallClingLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-11, 0)
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

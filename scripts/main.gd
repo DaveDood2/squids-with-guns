@@ -27,32 +27,11 @@ func build_navigation_region():
 		regions_count += 1
 		print("Map: ", map, " RIDS:", NavigationServer2D.map_get_regions(map))
 	print("Total regions: ", regions_count)
-		
-'''func build_navigation_region():
-	var navigation_outline = PackedVector2Array()
-	var navigation_polygon = NavigationPolygon.new()
-	for i in tilemap.get_used_cells(0):
-		if (tilemap.get_cell_atlas_coords(0, i) != EMPTY_TILE_COORDS):
-			# There is air here, add it to the navigation polygon region
-			var new_square = PackedVector2Array()
-			var square_center = to_global(tilemap.map_to_local(i))
-			new_square.append(square_center + Vector2(-TILE_SIZE/2, -TILE_SIZE/2))
-			new_square.append(square_center + Vector2(-TILE_SIZE/2, TILE_SIZE/2))
-			new_square.append(square_center + Vector2(TILE_SIZE/2, TILE_SIZE/2))
-			new_square.append(square_center + Vector2(TILE_SIZE/2, -TILE_SIZE/2))
-			#navigation_outline = Geometry2D.merge_polygons(navigation_outline, new_square)
-			navigation_polygon.add_outline(new_square)
-	navigation_polygon.make_polygons_from_outlines()
-	navigation_region.navigation_polygon = navigation_polygon
-	print("Polygons:", navigation_polygon.get_polygon_count())
-	return
-'''
-
 
 
 func _on_world_boundary_body_exited(body):
 	if (body.is_in_group("Character")):
-		print("OOB:", body.name)
+		#print("OOB:", body.name)
 		body.perish()
 		if (body.name == "Enemy"):
 			increment_score.emit()

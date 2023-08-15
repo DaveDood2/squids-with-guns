@@ -7,6 +7,7 @@ var min_zoom = 0.3
 
 func _ready():
 	zoom = Vector2(initial_zoom,initial_zoom)
+	print("size:", get_viewport().get_mouse_position())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

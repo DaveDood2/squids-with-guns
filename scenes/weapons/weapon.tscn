@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://drnhbv0yvqulv"]
+[gd_scene load_steps=21 format=3 uid="uid://drnhbv0yvqulv"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_hm042"]
 [ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="2_2x7sm"]
@@ -115,6 +115,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y4wdo"]
+streams_count = 1
+random_pitch = 1.25
+random_volume_offset_db = 1.0
+stream_0/stream = ExtResource("5_784q6")
+stream_0/weight = 1.0
+
 [node name="weapon" type="Node2D" groups=["weapon"]]
 script = ExtResource("1_hm042")
 projectile_scene = ExtResource("2_2x7sm")
@@ -133,8 +140,10 @@ offset = Vector2(14, 3)
 [node name="BulletSpawnPoint" type="Node2D" parent="GunSprite"]
 position = Vector2(21, 0)
 
-[node name="GunSfx" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_784q6")
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="SFX"]
+stream = SubResource("AudioStreamRandomizer_y4wdo")
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="animation_finished" from="GunSprite" to="." method="_on_gun_sprite_animation_finished"]

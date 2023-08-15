@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://m1vb56pwjojg"]
+
+[ext_resource type="VideoStream" path="res://art/characters/aquarium.ogv" id="1_wasp0"]
+[ext_resource type="Script" path="res://scripts/LoopingVideo.gd" id="2_2pnew"]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="LoopingVideo" type="VideoStreamPlayer" parent="ParallaxLayer"]
+stream = ExtResource("1_wasp0")
+autoplay = true
+script = ExtResource("2_2pnew")
+
+[connection signal="finished" from="ParallaxLayer/LoopingVideo" to="ParallaxLayer/LoopingVideo" method="_on_finished"]
