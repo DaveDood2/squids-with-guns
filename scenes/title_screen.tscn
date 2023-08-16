@@ -596,7 +596,9 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(585, 34)
+position_smoothing_enabled = true
 script = ExtResource("3_qwt5o")
+offset_scale = 0.335
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
