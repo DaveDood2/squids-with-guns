@@ -59,7 +59,7 @@ func spawn_bullet(emit_position):
 	projectile.spread = spread
 	projectile.lifetime = lifetime + randf_range(-lifetime_variance/2.0, lifetime_variance/2.0)
 	projectile.speed = speed + randf_range(-speed_variance/2.0, speed_variance/2.0)
-	projectile.parent_velocity = get_parent().velocity
+	projectile.parent_velocity = get_parent().get_parent().velocity
 	projectile.parent_sway_modifier = sway
 	projectile.bullet_owner = weapon_owner
 	projectile.ignore_collision_layer = owner_collision_layer
@@ -89,6 +89,7 @@ func set_enabled(enabled):
 	set_physics_process(enabled)
 	if (enabled):
 		show()
+		$SFX/equip.play()
 	else:
 		start_reload()
 		hide()

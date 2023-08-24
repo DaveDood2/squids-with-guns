@@ -19,6 +19,7 @@ var parent_velocity = Vector2() # parent's velocity gets added to bullet (e.g., 
 var ignore_collision_layer = -1 # Which collision layer to ignore (5 for player 6 for enemy)
 var parent_sway_modifier := 0.25 # How much the shooter's momentum affects this bullet
 const EMPTY_TILE_COORDS = Vector2i(4, 5)
+var ready_for_queue_free := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,6 +30,8 @@ func _ready():
 	set_collision_mask_value(ignore_collision_layer, false)
 
 func _physics_process(delta):
+	if (ready_for_queue_free):
+		return
 	if (lifetime < 0):
 		perish()
 	lifetime -= delta
@@ -50,7 +53,7 @@ func _physics_process(delta):
 			
 		#Bullet hit the terrain
 		elif collider.name == "TileMap": #Destroying tilemap w/ bullets: https://www.reddit.com/r/godot/comments/i0pzf6/how_to_implement_destructible_tiles_in_godot/
-			play_sfx("hit_tile")
+			$SFX/HitTileSfx.play()
 			var cell = tilemap.local_to_map(collision.get_position() - collision.get_normal())
 			var tile_data = tilemap.get_cell_tile_data(0, cell)
 			if (!tile_data):
@@ -68,13 +71,11 @@ func _physics_process(delta):
 			perish()
 	
 func perish():
-	queue_free()
-	
-func play_sfx(sound_effect):
-	var pitch = randf_range(0.8, 1.2)
-	match sound_effect:
-		"hit_tile":
-			$HitTileSfx.pitch_scale = pitch
-			$HitTileSfx.play()
-		_:
-			printerr("Unknown sound effect:", sound_effect)
+	ready_for_queue_free = true
+	hide()
+	if ($SFX/HitTileSfx.playing == false):
+		queue_free()
+
+func _on_hit_tile_sfx_finished():
+	if (ready_for_queue_free):
+		queue_free()

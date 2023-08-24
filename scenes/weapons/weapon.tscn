@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://drnhbv0yvqulv"]
+[gd_scene load_steps=22 format=3 uid="uid://drnhbv0yvqulv"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_hm042"]
 [ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="2_2x7sm"]
 [ext_resource type="Texture2D" uid="uid://k4r7oycdddjh" path="res://art/weapons/bananaGun.png" id="3_ivelc"]
 [ext_resource type="Texture2D" uid="uid://dbr8wn71rpoav" path="res://art/weapons/banana.png" id="4_3qf4s"]
 [ext_resource type="AudioStream" uid="uid://3mdsmvuu1d26" path="res://sfx/523687__bendyboi__suction-pop.wav" id="5_784q6"]
+[ext_resource type="AudioStream" uid="uid://bf4kibo6iv7ms" path="res://sfx/dig.wav" id="6_aca5d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmn6e"]
 atlas = ExtResource("3_ivelc")
@@ -144,6 +145,11 @@ position = Vector2(21, 0)
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="SFX"]
 stream = SubResource("AudioStreamRandomizer_y4wdo")
+volume_db = -8.254
+
+[node name="equip" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("6_aca5d")
+volume_db = -12.552
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="animation_finished" from="GunSprite" to="." method="_on_gun_sprite_animation_finished"]

@@ -1,12 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3gavv3focdi6"]
+[gd_scene load_steps=19 format=3 uid="uid://b3gavv3focdi6"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jl6h2"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_0e3ee"]
 [ext_resource type="PackedScene" uid="uid://ec4nu6wf50l7" path="res://scenes/player.tscn" id="2_ing7c"]
+[ext_resource type="SpriteFrames" uid="uid://dunss7ay2cspq" path="res://art/characters/squid_sprites.tres" id="4_yrvqb"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="5_d7a3j"]
 [ext_resource type="PackedScene" uid="uid://bxhbqb8ylcbr" path="res://scenes/hud.tscn" id="6_ah7i0"]
 [ext_resource type="PackedScene" uid="uid://3i585uceg2gk" path="res://scenes/enemy_spawner.tscn" id="7_2u21o"]
 [ext_resource type="PackedScene" uid="uid://dtmumrb38daei" path="res://scenes/enemy.tscn" id="7_7v13f"]
+[ext_resource type="SpriteFrames" uid="uid://bsx1oerxpk223" path="res://art/characters/spubb_sprites.tres" id="7_gl21x"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j4ckn"]
 
@@ -591,6 +593,7 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("2_ing7c")]
 position = Vector2(591, 15)
+animations = ExtResource("4_yrvqb")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 position = Vector2(-6, 19)
@@ -602,6 +605,7 @@ script = ExtResource("5_d7a3j")
 
 [node name="Enemy" parent="." instance=ExtResource("7_7v13f")]
 position = Vector2(975, -187)
+animations = ExtResource("7_gl21x")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false

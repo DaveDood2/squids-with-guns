@@ -42,3 +42,5 @@ target_position = Vector2(-11, 0)
 [node name="SFX" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="WeaponHolder" type="Node2D" parent="."]

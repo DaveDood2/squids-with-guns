@@ -118,25 +118,23 @@ func add_weapon(weapon_scene):
 	new_weapon.aim_reticle = aim_reticle
 	new_weapon.weapon_owner = get_instance_id()
 	new_weapon.owner_collision_layer = 5 if get_collision_layer_value(5) else 6
-	add_child(new_weapon)
-	select_weapon(new_weapon)
-	
-func select_weapon(new_weapon):
-	var weapon_list = get_children()
-	for weapon in weapon_list:
-		if (weapon.is_in_group("weapon")):
-			if (weapon != new_weapon):
-				weapon.set_enabled(false)
-	new_weapon.set_enabled(true)
+	$WeaponHolder.add_child(new_weapon)
+	if (selected_weapon):
+		selected_weapon.set_enabled(false)
 	selected_weapon = new_weapon
-	
+	selected_weapon.set_enabled(true)
+		
 func next_weapon():
-	selected_weapon_index = (selected_weapon_index + 1) % weapons.size()
-	select_weapon(weapons[selected_weapon_index])
+	selected_weapon.set_enabled(false)
+	selected_weapon_index = (selected_weapon_index + 1) % $WeaponHolder.get_child_count()
+	selected_weapon = $WeaponHolder.get_child(selected_weapon_index)
+	selected_weapon.set_enabled(true)
 	
 func prev_weapon():
-	selected_weapon_index = (selected_weapon_index - 1) % weapons.size()
-	select_weapon(weapons[selected_weapon_index])
+	selected_weapon.set_enabled(false)
+	selected_weapon_index = (selected_weapon_index - 1) % $WeaponHolder.get_child_count()
+	selected_weapon = $WeaponHolder.get_child(selected_weapon_index)
+	selected_weapon.set_enabled(true)
 
 func handle_jump():
 	# Handle Jump.
