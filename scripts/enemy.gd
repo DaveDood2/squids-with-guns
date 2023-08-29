@@ -7,7 +7,7 @@ var parachute_fall_modifier := 0.05
 
 func _ready():
 	super._ready()
-	aim_reticle.follow_mouse = false
+	aim_reticle.follow_player_input = false
 	aim_reticle.follow_players = true
 	aim_reticle.visible = false
 	aim_reticle.position = position

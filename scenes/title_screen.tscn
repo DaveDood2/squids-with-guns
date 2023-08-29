@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_ss5se"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="3_qwt5o"]
 [ext_resource type="PackedScene" uid="uid://1yrqbccbee2f" path="res://scenes/respawn_totem.tscn" id="6_svrne"]
+[ext_resource type="SpriteFrames" uid="uid://bsx1oerxpk223" path="res://art/characters/spubb_sprites.tres" id="6_tncso"]
 [ext_resource type="PackedScene" uid="uid://cp0x3icsg8vs5" path="res://scenes/respawning_fighter.tscn" id="7_3shei"]
-[ext_resource type="SpriteFrames" uid="uid://bsx1oerxpk223" path="res://art/characters/spubb_sprites.tres" id="7_m3iu2"]
 [ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="8_ex5vx"]
 [ext_resource type="PackedScene" uid="uid://t6x1ne8soadk" path="res://scenes/aiming_reticle.tscn" id="9_2mitu"]
 [ext_resource type="PackedScene" uid="uid://fxq61yn2m12b" path="res://scenes/weapons/shotgun.tscn" id="10_8tflm"]
@@ -566,6 +566,7 @@ sources/0 = SubResource("TileSetAtlasSource_8102u")
 vertices = PackedVector2Array(-880, -583, 1259, -643, 1242, 638, -879, 621)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-880, -583, 1259, -643, 1242, 638, -879, 621)])
+cell_size = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_guugy"]
 size = Vector2(112.332, 340.302)
@@ -626,7 +627,7 @@ team = "spubb"
 
 [node name="Respawning Fighter" parent="Characters/Spubb Team" instance=ExtResource("7_3shei")]
 position = Vector2(710, 46)
-animations = ExtResource("7_m3iu2")
+animations = ExtResource("6_tncso")
 projectile_scene = ExtResource("8_ex5vx")
 aim_reticle_scene = ExtResource("9_2mitu")
 weapons = Array[PackedScene]([ExtResource("10_8tflm")])
@@ -634,7 +635,7 @@ team = "spubb"
 
 [node name="Respawning Fighter2" parent="Characters/Spubb Team" instance=ExtResource("7_3shei")]
 position = Vector2(765, -157)
-animations = ExtResource("7_m3iu2")
+animations = ExtResource("6_tncso")
 projectile_scene = ExtResource("8_ex5vx")
 aim_reticle_scene = ExtResource("9_2mitu")
 weapons = Array[PackedScene]([ExtResource("10_y4v8r")])

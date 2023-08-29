@@ -35,7 +35,8 @@ func _ready():
 	$AnimatedSprite2D.sprite_frames = animations
 	# Add this character's reticle to the main scene
 	aim_reticle = aim_reticle_scene.instantiate()
-	get_tree().get_current_scene().add_child.call_deferred(aim_reticle)
+	#get_tree().get_current_scene().add_child.call_deferred(aim_reticle)
+	self.add_child.call_deferred(aim_reticle)
 	# Initialize health bar
 	health_bar = get_node("HealthBar")
 	health_bar.max_value = health
@@ -123,6 +124,7 @@ func add_weapon(weapon_scene):
 		selected_weapon.set_enabled(false)
 	selected_weapon = new_weapon
 	selected_weapon.set_enabled(true)
+	selected_weapon_index = $WeaponHolder.get_child_count() - 1
 		
 func next_weapon():
 	selected_weapon.set_enabled(false)

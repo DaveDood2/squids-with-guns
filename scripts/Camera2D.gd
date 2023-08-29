@@ -14,9 +14,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Handle zooming in/out
-	if Input.is_action_just_released("zoom_in"):
+	if Input.is_action_pressed("zoom_in"):
 		zoom_tween(zoom + (Vector2(zoom_speed,zoom_speed) * delta))
-	if Input.is_action_just_released("zoom_out"):
+	if Input.is_action_pressed("zoom_out"):
 		zoom_tween(zoom - (Vector2(zoom_speed,zoom_speed) * delta))
 		
 	# Handle moving camera towards the mouse pointer

@@ -34,8 +34,8 @@ func _physics_process(delta):
 	draw_gun()
 
 func draw_gun():
-	$GunSprite.look_at(aim_reticle.position)
-	var rot = rad_to_deg((aim_reticle.position - $GunSprite.global_position).angle())
+	$GunSprite.look_at(aim_reticle.global_position)
+	var rot = rad_to_deg((aim_reticle.position - $GunSprite.position).angle())
 	if (rot >= -90 and rot <= 90):
 		$GunSprite.flip_v = 0
 	else:
@@ -55,7 +55,7 @@ func shoot(emit_position):
 func spawn_bullet(emit_position):
 	var projectile = projectile_scene.instantiate()
 	projectile.position = emit_position
-	projectile.look_at_position = aim_reticle.position
+	projectile.look_at_position = aim_reticle.global_position
 	projectile.spread = spread
 	projectile.lifetime = lifetime + randf_range(-lifetime_variance/2.0, lifetime_variance/2.0)
 	projectile.speed = speed + randf_range(-speed_variance/2.0, speed_variance/2.0)
