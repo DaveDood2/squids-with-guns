@@ -8,12 +8,12 @@ extends CharacterBody2D
 
 signal die
 
-const SPEED = 250.0
-const JUMP_VELOCITY = -350.0
+const SPEED = 150.0
+const JUMP_VELOCITY = -300.0
 const JUMP_GRACE_PERIOD = 0.2 # Time in seconds to allow character to jump right after they slip off a ledge
 const WALL_SLIDE_VELOCITY = 50.0 # Speed in which the player moves down when sliding on walls
-const HIGH_GRAVITY_MODIFIER = 1.2 # How fast the player falls when they are not holding jump
-const LOW_GRAVITY_MODIFIER = 0.5 # How much to multiply the gravity by when the player holds the jump key
+const HIGH_GRAVITY_MODIFIER = 1.5 # How fast the player falls when they are not holding jump
+const LOW_GRAVITY_MODIFIER = 0.4 # How much to multiply the gravity by when the player holds the jump key
 const NO_TEAM = "NO_TEAM"
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -30,18 +30,19 @@ var health = 100.0 # How much punishment a character can take before they've had
 var max_health = health
 var health_bar
 
-
 func _ready():
 	$AnimatedSprite2D.sprite_frames = animations
 	# Add this character's reticle to the main scene
-	aim_reticle = aim_reticle_scene.instantiate()
-	#get_tree().get_current_scene().add_child.call_deferred(aim_reticle)
-	self.add_child.call_deferred(aim_reticle)
+	add_aim_reticle()
 	# Initialize health bar
 	health_bar = get_node("HealthBar")
 	health_bar.max_value = health
 	health_bar.value = health
 	add_weapons()
+	
+func add_aim_reticle():
+	aim_reticle = aim_reticle_scene.instantiate()
+	self.add_child.call_deferred(aim_reticle)
 
 func _physics_process(delta):
 	if not is_on_floor():
