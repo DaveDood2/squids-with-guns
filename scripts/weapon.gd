@@ -48,7 +48,7 @@ func shoot(emit_position):
 		$SFX/shoot.play()
 		for x in range(0, bullet_amount):
 			#spawn_bullet(emit_position)
-			spawn_bullet($GunSprite/BulletSpawnPoint.position)
+			spawn_bullet($GunSprite/BulletSpawnPoint.global_position)
 	if ((current_ammo <= 0) and (not is_reloading)): # no more ammo or just ran out
 		start_reload()
 		
@@ -63,8 +63,9 @@ func spawn_bullet(emit_position):
 	projectile.parent_sway_modifier = sway
 	projectile.bullet_owner = weapon_owner
 	projectile.ignore_collision_layer = owner_collision_layer
+	get_tree().get_nodes_in_group("level")[0].add_child(projectile)
 	#get_tree().get_current_scene().add_child(projectile)
-	get_parent().get_parent().add_child(projectile)
+	#get_parent().get_parent().add_child(projectile)
 	
 func start_reload():
 	if (current_ammo < max_ammo):

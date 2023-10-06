@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2kcqxqc7gwih"]
+[gd_scene load_steps=15 format=3 uid="uid://c2kcqxqc7gwih"]
 
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="1_rwj67"]
 [ext_resource type="PackedScene" uid="uid://dtmumrb38daei" path="res://scenes/enemy.tscn" id="2_mfnna"]
 [ext_resource type="PackedScene" uid="uid://3i585uceg2gk" path="res://scenes/enemy_spawner.tscn" id="3_j3415"]
+[ext_resource type="PackedScene" uid="uid://ec4nu6wf50l7" path="res://scenes/player.tscn" id="4_ydyxg"]
+[ext_resource type="SpriteFrames" uid="uid://dunss7ay2cspq" path="res://art/characters/squid_sprites.tres" id="5_x8g4g"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j4ckn"]
 
@@ -562,7 +564,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-880, -583, 1259, -643, 1242, 638, -879, 621)])
 cell_size = 16.0
 
-[node name="Test_Level" type="Node2D"]
+[node name="Test_Level" type="Node2D" groups=["level"]]
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -592,7 +594,6 @@ team = "Enemy"
 [node name="EnemySpawner" parent="." instance=ExtResource("3_j3415")]
 
 [node name="WorldBoundary" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, 649)
 scale = Vector2(20.84, 1.24)
 collision_layer = 0
@@ -606,3 +607,15 @@ shape = SubResource("RectangleShape2D_it8sh")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_21mq5")
+
+[node name="Player1" parent="." groups=["Living"] instance=ExtResource("4_ydyxg")]
+position = Vector2(591, 15)
+player_num = 1
+animations = ExtResource("5_x8g4g")
+team = "Player"
+
+[node name="Player2" parent="." groups=["Living"] instance=ExtResource("4_ydyxg")]
+position = Vector2(556, 15)
+player_num = 2
+animations = ExtResource("5_x8g4g")
+team = "Player"

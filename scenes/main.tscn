@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3gavv3focdi6"]
+[gd_scene load_steps=5 format=3 uid="uid://b3gavv3focdi6"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jl6h2"]
-[ext_resource type="PackedScene" uid="uid://ec4nu6wf50l7" path="res://scenes/player.tscn" id="2_ing7c"]
 [ext_resource type="PackedScene" uid="uid://c2kcqxqc7gwih" path="res://scenes/levels/test_level.tscn" id="3_gjps4"]
-[ext_resource type="SpriteFrames" uid="uid://dunss7ay2cspq" path="res://art/characters/squid_sprites.tres" id="4_yrvqb"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="5_d7a3j"]
 [ext_resource type="PackedScene" uid="uid://bxhbqb8ylcbr" path="res://scenes/hud.tscn" id="6_ah7i0"]
 
@@ -20,6 +18,7 @@ offset_bottom = 692.0
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 audio_listener_enable_2d = true
@@ -27,25 +26,6 @@ size = Vector2i(1339, 302)
 render_target_update_mode = 4
 
 [node name="Test_Level" parent="VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_gjps4")]
-
-[node name="Player1" parent="VBoxContainer/SubViewportContainer/SubViewport" groups=["Living"] instance=ExtResource("2_ing7c")]
-position = Vector2(591, 15)
-player_num = 1
-animations = ExtResource("4_yrvqb")
-team = "Player"
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Player1"]
-position = Vector2(-6, 19)
-remote_path = NodePath("../../Camera2D")
-
-[node name="Player2" parent="VBoxContainer/SubViewportContainer/SubViewport" groups=["Living"] instance=ExtResource("2_ing7c")]
-position = Vector2(591, 15)
-player_num = 2
-animations = ExtResource("4_yrvqb")
-team = "Player"
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Player2"]
-remote_path = NodePath("../../../../SubViewportContainer2/SubViewport/Camera2D2")
 
 [node name="Camera2D" type="Camera2D" parent="VBoxContainer/SubViewportContainer/SubViewport"]
 position = Vector2(585, 34)
@@ -63,7 +43,5 @@ render_target_update_mode = 4
 [node name="Camera2D2" type="Camera2D" parent="VBoxContainer/SubViewportContainer2/SubViewport"]
 position = Vector2(591, 15)
 script = ExtResource("5_d7a3j")
-
-[node name="Test_Level" parent="VBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("3_gjps4")]
 
 [connection signal="increment_score" from="." to="HUD" method="_on_main_increment_score"]

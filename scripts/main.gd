@@ -9,8 +9,10 @@ signal increment_score
 signal game_over
 
 func _ready():
-	pass
-	#build_navigation_region()
+	# Set player 2's world to be the same as player 1's so they see the same thing.
+	# TODO: clean up code to account for handling viewports with 1, 3, and 4 players.
+	$VBoxContainer/SubViewportContainer2/SubViewport.world_2d = $VBoxContainer/SubViewportContainer/SubViewport.world_2d
+	
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):

@@ -66,7 +66,7 @@ func is_touching_wall():
 		return true
 	return false
 
-func attack(emit_position = self.position):
+func attack(emit_position = self.global_position):
 	selected_weapon.shoot(emit_position)
 	attack_cooldown = selected_weapon.cooldown
 	return attack_cooldown
