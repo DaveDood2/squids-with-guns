@@ -8,26 +8,23 @@ signal game_over
 var playerCount = 2
 
 func _ready():
-	# Set player 2's world to be the same as player 1's so they see the same thing.
-	# TODO: clean up code to account for handling viewports with 1, 3, and 4 players.
-	#$VBoxContainer/SubViewportContainer2/SubViewport.world_2d = $VBoxContainer/SubViewportContainer/SubViewport.world_2d
-	var levelNode = level_scene.instantiate()
-	var world_2d
+	var world_2d = $VBoxContainer/playerView/SubViewport.world_2d
 	for player in range(1, playerCount + 1):
-		var newPlayerView = SubViewportContainer.new()
-		newPlayerView.stretch = true
-		var newSubViewport = SubViewport.new()
-		newSubViewport.add_child(Camera2D.new())
+		var currentPlayer = get_tree().get_nodes_in_group("level")[0].get_node("Player" + str(player))
 		if (player == 1):
-			newSubViewport.add_child(levelNode)
-			newSubViewport.world_2d = levelNode
-			world_2d = newSubViewport.world_2d
-		else:
+			currentPlayer.get_node("RemoteTransform2D").set_remote_node($VBoxContainer/playerView/SubViewport/Camera2D.get_path())
+		else: # player 2 and onwards...
+			var newPlayerView = SubViewportContainer.new()
+			newPlayerView.stretch = true
+			newPlayerView.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			var newSubViewport = SubViewport.new()
+			var newCamera = Camera2D.new()
+			newSubViewport.add_child(newCamera)
 			newSubViewport.world_2d = world_2d
-		newPlayerView.add_child(newSubViewport)
-		
-			
-		$VBoxContainer.add_child(newPlayerView)
+			newSubViewport.audio_listener_enable_2d = true
+			newPlayerView.add_child(newSubViewport)
+			$VBoxContainer.add_child(newPlayerView)
+			currentPlayer.get_node("RemoteTransform2D").set_remote_node(newCamera.get_path())
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):

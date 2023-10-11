@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://drnhbv0yvqulv" path="res://scenes/weapons/weapon.tscn" id="4_w873w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]
-radius = 3.50262
-height = 7.00525
+radius = 4.537
+height = 14.282
 
 [node name="Character" type="CharacterBody2D" groups=["Character"]]
 position = Vector2(6, -19)
@@ -42,9 +42,5 @@ target_position = Vector2(11, 0)
 target_position = Vector2(-11, 0)
 
 [node name="SFX" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_55pwi")
-animation = &"idle"
 
 [node name="WeaponHolder" type="Node2D" parent="."]
