@@ -54,18 +54,24 @@ func _physics_process(delta):
 			var cell = collider.local_to_map(collision.get_position() - collision.get_normal())
 			var tile_data = collider.get_cell_tile_data(0, cell)
 			if (!tile_data):
-				print("Skipped")
+				# Necessary to avoid a bug when a bullet hits stairs at a weird angle.
+				# The bullet will collide but not be close enough to register being on the tile.
+				#print("Skipped")
 				perish()
-			else:
-				var new_tile_health = tile_data.get_custom_data("Durability") - terrain_damage
-				#print("Tile health: %s" % new_tile_health)
-				if (new_tile_health <= 0):
-					collider.set_cell(0, cell, 0, EMPTY_TILE_COORDS)
-				else:
-					collider.set_cell(0, cell, 0, EMPTY_TILE_COORDS)
-					#tile_data.set_custom_data("Durability", new_tile_health)
-				#print("Collision:" + tile_id)
-			perish()
+			else: # Tile data exists
+				# Check if tile is unbreakable
+				if (!tile_data.get_custom_data("isBreakable")):
+					perish()
+				else: # Tile is breakable and should be damaged.
+					var new_tile_health = tile_data.get_custom_data("Durability") - terrain_damage
+					#print("Tile health: %s" % new_tile_health)
+					if (new_tile_health <= 0):
+						collider.set_cell(0, cell, 0, EMPTY_TILE_COORDS)
+					else:
+						#collider.set_cell(0, cell, 0, EMPTY_TILE_COORDS)
+						tile_data.set_custom_data("Durability", new_tile_health)
+					#print("Collision:" + tile_id)
+					perish()
 	
 func perish():
 	ready_for_queue_free = true

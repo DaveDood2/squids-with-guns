@@ -1,47 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3gavv3focdi6"]
+[gd_scene load_steps=4 format=3 uid="uid://b3gavv3focdi6"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jl6h2"]
-[ext_resource type="PackedScene" uid="uid://c2kcqxqc7gwih" path="res://scenes/levels/test_level.tscn" id="3_gjps4"]
-[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="5_d7a3j"]
+[ext_resource type="PackedScene" uid="uid://dwtcfeg1htogm" path="res://scenes/levels/2_player_fight_level.tscn" id="4_dld72"]
 [ext_resource type="PackedScene" uid="uid://bxhbqb8ylcbr" path="res://scenes/hud.tscn" id="6_ah7i0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jl6h2")
+level_scene = ExtResource("4_dld72")
 
 [node name="HUD" parent="." instance=ExtResource("6_ah7i0")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_right = 1156.0
 offset_bottom = 692.0
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer"]
-disable_3d = true
-transparent_bg = true
-handle_input_locally = false
-audio_listener_enable_2d = true
-size = Vector2i(1339, 302)
-render_target_update_mode = 4
-
-[node name="Test_Level" parent="VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_gjps4")]
-
-[node name="Camera2D" type="Camera2D" parent="VBoxContainer/SubViewportContainer/SubViewport"]
-position = Vector2(585, 34)
-script = ExtResource("5_d7a3j")
-
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer2"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1444, 337)
-render_target_update_mode = 4
-
-[node name="Camera2D2" type="Camera2D" parent="VBoxContainer/SubViewportContainer2/SubViewport"]
-position = Vector2(591, 15)
-script = ExtResource("5_d7a3j")
 
 [connection signal="increment_score" from="." to="HUD" method="_on_main_increment_score"]
