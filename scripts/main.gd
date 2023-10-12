@@ -8,6 +8,9 @@ signal game_over
 var playerCount = 2
 
 func _ready():
+	if (get_tree().current_scene.name != "Main"):
+		return
+	get_viewport().transparent_bg = true
 	var world_2d = $VBoxContainer/playerView/SubViewport.world_2d
 	for player in range(1, playerCount + 1):
 		var currentPlayer = get_tree().get_nodes_in_group("level")[0].get_node("Player" + str(player))
@@ -33,6 +36,9 @@ func _process(_delta):
 		print("[DEBUG] Reloaded scene!")
 		get_tree().reload_current_scene()
 		
+	if Input.is_action_just_pressed("debug_close_game"):
+		print("[DEBUG] Closing game!")
+		get_tree().quit()
 
 func _on_world_boundary_body_exited(body):
 	if (body.is_in_group("Character")):
@@ -42,3 +48,4 @@ func _on_world_boundary_body_exited(body):
 			increment_score.emit()
 		if (body.name == "Player"):
 			game_over.emit()
+			

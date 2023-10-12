@@ -38,8 +38,10 @@ func draw_gun():
 	var rot = rad_to_deg((aim_reticle.position - $GunSprite.position).angle())
 	if (rot >= -90 and rot <= 90):
 		$GunSprite.flip_v = 0
+		$GunSprite/BulletSpawnPoint.position.y = 0
 	else:
 		$GunSprite.flip_v = 1
+		$GunSprite/BulletSpawnPoint.position.y = 6
 
 func shoot(emit_position):
 	if (current_ammo > 0): # still has ammo & not on cooldown

@@ -1,6 +1,6 @@
 [gd_scene load_steps=60 format=3 uid="uid://m1vb56pwjojg"]
 
-[ext_resource type="Script" path="res://art/characters/background.gd" id="1_lrm86"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="1_lrm86"]
 [ext_resource type="Texture2D" uid="uid://ciytja58y8c1f" path="res://art/aquarium_spritesheet.png" id="1_ywgar"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvj4q"]
@@ -407,9 +407,11 @@ animations = [{
 script = ExtResource("1_lrm86")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+texture_repeat = 2
 motion_scale = Vector2(0.5, 0.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxLayer"]
+texture_repeat = 2
 position = Vector2(1500, 871)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_eyypl")

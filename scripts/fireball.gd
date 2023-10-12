@@ -23,4 +23,4 @@ func draw_gun():
 		$GunSprite/BulletSpawnPoint.position.y = 0
 	else:
 		$GunSprite.flip_v = 1
-		$GunSprite/BulletSpawnPoint.position.y = 10
+		$GunSprite/BulletSpawnPoint.position.y = 6

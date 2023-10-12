@@ -88,14 +88,19 @@ stream_0/weight = 1.0
 script = ExtResource("2_dp1y5")
 
 [node name="GunSprite" parent="." index="2"]
+position = Vector2(-3, 4)
 sprite_frames = SubResource("SpriteFrames_4hhsj")
-animation = &"reloading"
 
 [node name="BulletSpawnPoint" parent="GunSprite" index="0"]
-position = Vector2(27, -5)
+position = Vector2(27, -4)
+
+[node name="SFX" parent="." index="3"]
+visible = false
 
 [node name="shoot" parent="SFX" index="0"]
+visible = false
 stream = SubResource("AudioStreamRandomizer_vw054")
 
 [node name="equip" parent="SFX" index="1"]
+visible = false
 pitch_scale = 0.68
