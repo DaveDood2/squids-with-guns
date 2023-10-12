@@ -135,7 +135,7 @@ offset_bottom = 40.0
 
 [node name="GunSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_e1pit")
-animation = &"shooting"
+animation = &"idle"
 offset = Vector2(14, 3)
 
 [node name="BulletSpawnPoint" type="Node2D" parent="GunSprite"]

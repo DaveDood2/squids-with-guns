@@ -10,7 +10,7 @@ func _ready():
 	reload_time = 1.0 # Time in seconds before reload finished
 	spread = 0.5 # random spread of bullets in degrees
 	bullet_amount = 5 # how many bullets are fired concurrently per shot
-	speed = 350
+	speed = 400
 	speed_variance = 150
 	sway = 0.1
 	super._ready()
