@@ -1,15 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtmumrb38daei"]
+[gd_scene load_steps=12 format=3 uid="uid://dtmumrb38daei"]
 
 [ext_resource type="PackedScene" uid="uid://bpdvjwncytche" path="res://scenes/character.tscn" id="1_mjqpm"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="2_a7yrn"]
 [ext_resource type="AudioStream" uid="uid://b5do0fwqrg3v1" path="res://sfx/characters/spubb/spubb_pain/spubb_pain1.wav" id="4_tgyfj"]
 [ext_resource type="AudioStream" uid="uid://lr4rhbd7hvpq" path="res://sfx/characters/spubb/spubb_pain/spubb_pain2.wav" id="5_ihhfk"]
 [ext_resource type="AudioStream" uid="uid://b8vcfaklqjwam" path="res://sfx/characters/spubb/spubb_pain/spubb_pain3.wav" id="6_6gtwh"]
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/characters/squidSprites.png" id="6_jkitn"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jk0oa"]
-streams_count = 3
 random_pitch = 1.29
-random_volume_offset_db = 0.0
+streams_count = 3
 stream_0/stream = ExtResource("4_tgyfj")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("5_ihhfk")
@@ -17,8 +17,37 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_6gtwh")
 stream_2/weight = 1.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu743"]
+atlas = ExtResource("6_jkitn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rsnt"]
+atlas = ExtResource("6_jkitn")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf6b4"]
+atlas = ExtResource("6_jkitn")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3o7ko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu743")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rsnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf6b4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Fighter" groups=["Enemy", "Living"] instance=ExtResource("1_mjqpm")]
-position = Vector2(-81, -14)
+position = Vector2(-3, -6)
 collision_layer = 32
 script = ExtResource("2_a7yrn")
 
@@ -46,5 +75,8 @@ position = Vector2(0, 11)
 [node name="death" type="AudioStreamPlayer2D" parent="SFX" index="0"]
 stream = SubResource("AudioStreamRandomizer_jk0oa")
 volume_db = -2.91
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="7"]
+sprite_frames = SubResource("SpriteFrames_3o7ko")
 
 [connection signal="die" from="." to="." method="_on_character_died"]

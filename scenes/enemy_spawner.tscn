@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_v0dcv"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -669, -777, 0, 0, 0, 0, 164, -843, 0, 0, 0, 0, 1062, -716, 0, 0, 0, 0, -263, -712, 0, 0, 0, 0, -672, -782)
+"points": PackedVector2Array(0, 0, 0, 0, -624, -792, 0, 0, 0, 0, 164, -843, 0, 0, 0, 0, 719, -695, 0, 0, 0, 0, -263, -712, 0, 0, 0, 0, -640, -802)
 }
 point_count = 5
 
@@ -27,8 +27,8 @@ script = ExtResource("1_qbhe5")
 enemy = ExtResource("2_1lwkd")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(-669, -777)
-rotation = -0.0790665
+position = Vector2(-624, -792)
+rotation = -0.0646307
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D"]
 position = Vector2(4.62305, -12.8281)

@@ -190,5 +190,5 @@ reticle_right_p2={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.364706, 0.427451, 0.490196, 1)
+environment/defaults/default_clear_color=Color(0.139882, 0.141158, 0.251713, 1)
 viewport/transparent_background=true

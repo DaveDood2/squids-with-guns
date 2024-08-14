@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://b2xsd28nlabbw"]
+[gd_scene load_steps=23 format=3 uid="uid://b2xsd28nlabbw"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_h4hxk"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_ss5se"]
+[ext_resource type="PackedScene" uid="uid://b3gavv3focdi6" path="res://scenes/main.tscn" id="2_wlq3e"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="3_qwt5o"]
 [ext_resource type="PackedScene" uid="uid://1yrqbccbee2f" path="res://scenes/respawn_totem.tscn" id="6_svrne"]
 [ext_resource type="SpriteFrames" uid="uid://bsx1oerxpk223" path="res://art/characters/spubb_sprites.tres" id="6_tncso"]
@@ -617,6 +618,7 @@ size = Vector2(112.332, 340.302)
 
 [node name="Title Screen" type="Node2D" groups=["level"]]
 script = ExtResource("1_h4hxk")
+two_player_scene = ExtResource("2_wlq3e")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -701,6 +703,7 @@ weapons = Array[PackedScene]([ExtResource("10_y4v8r")])
 team = "squid"
 
 [node name="Background" parent="." instance=ExtResource("12_cmgo4")]
+visible = false
 
 [node name="Title UI" type="VBoxContainer" parent="."]
 anchors_preset = 8
@@ -715,13 +718,13 @@ offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="1 Player" type="Button" parent="Title UI"]
+[node name="One Player" type="Button" parent="Title UI"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "1 Player Game
 "
 
-[node name="2 Player" type="Button" parent="Title UI"]
+[node name="Two Player" type="Button" parent="Title UI"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "2 Player Versus"
@@ -731,9 +734,13 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Help n' Credits"
 
-[node name="Button5" type="Button" parent="Title UI"]
+[node name="Exit Game" type="Button" parent="Title UI"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Bye"
 
 [connection signal="body_exited" from="WorldBoundary" to="." method="_on_world_boundary_body_exited"]
+[connection signal="pressed" from="Title UI/One Player" to="." method="_on_one_player_pressed"]
+[connection signal="pressed" from="Title UI/Two Player" to="." method="_on_two_player_pressed"]
+[connection signal="pressed" from="Title UI/Credits_Help" to="." method="_on_credits_help_pressed"]
+[connection signal="pressed" from="Title UI/Exit Game" to="." method="_on_exit_game_pressed"]

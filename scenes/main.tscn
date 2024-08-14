@@ -6,7 +6,6 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jl6h2")
-level_scene = ExtResource("4_dld72")
 
 [node name="HUD" parent="." instance=ExtResource("6_ah7i0")]
 visible = false

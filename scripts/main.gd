@@ -1,6 +1,8 @@
 extends Node2D
 
-@export var level_scene : PackedScene
+@export var one_player_scene : PackedScene
+@export var two_player_scene : PackedScene
+@export var credits_scene : PackedScene
 
 signal increment_score
 signal game_over
@@ -8,7 +10,7 @@ signal game_over
 var playerCount = 2
 
 func _ready():
-	if (get_tree().current_scene.name != "Main"):
+	if (get_tree().current_scene.name == "Title Screen"):
 		return
 	get_viewport().transparent_bg = true
 	var world_2d = $VBoxContainer/playerView/SubViewport.world_2d
@@ -49,3 +51,19 @@ func _on_world_boundary_body_exited(body):
 		if (body.name == "Player"):
 			game_over.emit()
 			
+
+
+func _on_one_player_pressed():
+	get_tree().change_scene_to_packed(one_player_scene)
+
+
+func _on_two_player_pressed():
+	get_tree().change_scene_to_packed(two_player_scene)
+
+
+func _on_credits_help_pressed():
+	get_tree().change_scene_to_packed(credits_scene)
+
+
+func _on_exit_game_pressed():
+	get_tree().quit()
