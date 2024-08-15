@@ -1,16 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3gavv3focdi6"]
+[gd_scene load_steps=6 format=3 uid="uid://b3gavv3focdi6"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jl6h2"]
-[ext_resource type="PackedScene" uid="uid://b2xsd28nlabbw" path="res://scenes/title_screen.tscn" id="2_xvsal"]
 [ext_resource type="PackedScene" uid="uid://dwtcfeg1htogm" path="res://scenes/levels/2_player_fight_level.tscn" id="4_dld72"]
+[ext_resource type="AudioStream" uid="uid://b3qrpnxg23qdm" path="res://music/Shovel Knight King of Cards OST Joustus The Royal Overture Extended.mp3" id="4_i47x8"]
+[ext_resource type="AudioStream" uid="uid://ba68pn8r5cb1j" path="res://music/Joustus Victory as Expected.mp3" id="5_ijk8w"]
 [ext_resource type="PackedScene" uid="uid://bxhbqb8ylcbr" path="res://scenes/hud.tscn" id="6_ah7i0"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("current_level")]
 script = ExtResource("1_jl6h2")
-main_menu_scene = ExtResource("2_xvsal")
 current_level = NodePath("VBoxContainer/playerView/SubViewport/2_player_fight_level")
 
 [node name="HUD" parent="." instance=ExtResource("6_ah7i0")]
+
+[node name="VSTheme" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource("4_i47x8")
+volume_db = -30.928
+autoplay = true
+
+[node name="GameOverTheme" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource("5_ijk8w")
+volume_db = -30.928
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_direction = 2

@@ -2,7 +2,6 @@ extends Node2D
 
 @export var two_player_coop_scene : PackedScene
 @export var two_player_versus_scene : PackedScene
-@export var credits_scene : PackedScene
 @export var main_menu_scene : PackedScene
 @export var current_level : Node2D
 
@@ -12,6 +11,7 @@ signal player_died
 
 var playerCount = 2
 var livingPlayers = playerCount
+var credits_visible : bool = false
 
 func _ready():
 	if (get_tree().current_scene.name == "Title Screen"):
@@ -49,6 +49,10 @@ func _process(_delta):
 		#else:
 			print("[DEBUG] Closing game!")
 			get_tree().quit()
+	if Input.is_action_just_pressed("CloseCredits") and credits_visible:
+		$HelpAndCredits.hide()
+		$"Title UI".show()
+		credits_visible = false
 		
 
 
@@ -61,7 +65,7 @@ func _on_world_boundary_body_exited(body):
 		if (body.is_in_group("Player")):
 			livingPlayers -= 1
 			player_died.emit(body.player_num)
-			if livingPlayers <= 0:	
+			if livingPlayers <= 0:
 				game_over.emit()
 			
 
@@ -75,7 +79,9 @@ func _on_two_player_pressed():
 
 
 func _on_credits_help_pressed():
-	get_tree().change_scene_to_packed(credits_scene)
+	$HelpAndCredits.show()
+	$"Title UI".hide()
+	credits_visible = true
 
 
 func _on_exit_game_pressed():

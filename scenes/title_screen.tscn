@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://b2xsd28nlabbw"]
+[gd_scene load_steps=25 format=3 uid="uid://b2xsd28nlabbw"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_h4hxk"]
 [ext_resource type="PackedScene" uid="uid://dsjvs3rju5r0v" path="res://scenes/two_player_coop.tscn" id="2_1l30o"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_ss5se"]
-[ext_resource type="PackedScene" uid="uid://b3gavv3focdi6" path="res://scenes/main.tscn" id="2_wlq3e"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="3_qwt5o"]
+[ext_resource type="PackedScene" uid="uid://b3gavv3focdi6" path="res://scenes/main.tscn" id="3_usro2"]
 [ext_resource type="PackedScene" uid="uid://1yrqbccbee2f" path="res://scenes/respawn_totem.tscn" id="6_svrne"]
 [ext_resource type="SpriteFrames" uid="uid://bsx1oerxpk223" path="res://art/characters/spubb_sprites.tres" id="6_tncso"]
 [ext_resource type="PackedScene" uid="uid://cp0x3icsg8vs5" path="res://scenes/respawning_fighter.tscn" id="7_3shei"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://drnhbv0yvqulv" path="res://scenes/weapons/weapon.tscn" id="10_y4v8r"]
 [ext_resource type="SpriteFrames" uid="uid://dunss7ay2cspq" path="res://art/characters/squid_sprites.tres" id="11_ul7rm"]
 [ext_resource type="PackedScene" uid="uid://m1vb56pwjojg" path="res://art/characters/background.tscn" id="12_cmgo4"]
+[ext_resource type="AudioStream" uid="uid://cgpva7p8oguln" path="res://music/Hylics 2 OST Xeno Arcadia.mp3" id="15_1qy8b"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j4ckn"]
 source_geometry_group_name = &"navigation_polygon_source_group"
@@ -620,7 +621,7 @@ size = Vector2(112.332, 340.302)
 [node name="Title Screen" type="Node2D" groups=["level"]]
 script = ExtResource("1_h4hxk")
 two_player_coop_scene = ExtResource("2_1l30o")
-two_player_versus_scene = ExtResource("2_wlq3e")
+two_player_versus_scene = ExtResource("3_usro2")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -665,7 +666,7 @@ position = Vector2(1453, 7)
 team = "spubb"
 
 [node name="Respawning Fighter" parent="Characters/Spubb Team" instance=ExtResource("7_3shei")]
-position = Vector2(710, 46)
+position = Vector2(711, 47)
 animations = ExtResource("6_tncso")
 projectile_scene = ExtResource("8_ex5vx")
 aim_reticle_scene = ExtResource("9_2mitu")
@@ -673,7 +674,7 @@ weapons = Array[PackedScene]([ExtResource("10_8tflm")])
 team = "spubb"
 
 [node name="Respawning Fighter2" parent="Characters/Spubb Team" instance=ExtResource("7_3shei")]
-position = Vector2(765, -157)
+position = Vector2(951, -150)
 animations = ExtResource("6_tncso")
 projectile_scene = ExtResource("8_ex5vx")
 aim_reticle_scene = ExtResource("9_2mitu")
@@ -696,7 +697,7 @@ weapons = Array[PackedScene]([ExtResource("10_8tflm")])
 team = "squid"
 
 [node name="Respawning Fighter2" parent="Characters/Squid Team" instance=ExtResource("7_3shei")]
-position = Vector2(301, 6)
+position = Vector2(136, -103)
 collision_layer = 16
 animations = ExtResource("11_ul7rm")
 projectile_scene = ExtResource("8_ex5vx")
@@ -740,6 +741,43 @@ text = "Help n' Credits"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Bye"
+
+[node name="HelpAndCredits" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 20.0
+offset_top = -283.0
+offset_right = 1146.0
+offset_bottom = 344.0
+bbcode_enabled = true
+text = "[b]Controls:[/b]
+[u]Player 1[/u]
+WASD - Move & Jump
+Mouse - Aim weapon, click to fire weapon
+Q/E - Swap current weapons
+
+[u]Player 2[/u]
+Left Stick - Move
+Bottom face button - Jump
+Right Stick - Aim weapon
+Right back trigger - fire weapon
+Shoulder buttons - Swap current weapon
+
+[b]Credits:[/b]
+Tileset - https://aamatniekss.itch.io/ancient-temple-tilesets
+Title theme - \"Xeno Arcadia\", composed by Chuck Salamone
+2 Player VS theme - \"Joustus - The Royal Overture\", composed by Jake Kaufman
+2 Player VS victory - \"Joustus - Victory, as Expected\", composed by Jake Kaufman
+2 Player Co-op  theme - \"The Dark One\", composed by Anamanaguchi
+Pop sound effect - https://freesound.org/people/BendyBoi/sounds/523687/
+A good chunk of the assets were recycled from \"Fun and Balanced,\" a game I made with my friend, Lilly, that had a similar concept.s
+Code & everything else by me, Lucy - https://lucys-game-nook.neocities.org/
+
+Click to close"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_1qy8b")
+volume_db = -6.559
+autoplay = true
 
 [connection signal="body_exited" from="WorldBoundary" to="." method="_on_world_boundary_body_exited"]
 [connection signal="pressed" from="Title UI/One Player" to="." method="_on_one_player_pressed"]
