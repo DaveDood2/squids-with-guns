@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b3qrpnxg23qdm"
+path="res://.godot/imported/Shovel Knight King of Cards OST Joustus The Royal Overture Extended.mp3-5415fbeaa2d6913b0d4db4e155f667f8.mp3str"
+
+[deps]
+
+source_file="res://music/Shovel Knight King of Cards OST Joustus The Royal Overture Extended.mp3"
+dest_files=["res://.godot/imported/Shovel Knight King of Cards OST Joustus The Royal Overture Extended.mp3-5415fbeaa2d6913b0d4db4e155f667f8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

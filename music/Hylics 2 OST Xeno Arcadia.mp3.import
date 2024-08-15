@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cgpva7p8oguln"
+path="res://.godot/imported/Hylics 2 OST Xeno Arcadia.mp3-b3997309dbe1d7f90e652fba7fdf296b.mp3str"
+
+[deps]
+
+source_file="res://music/Hylics 2 OST Xeno Arcadia.mp3"
+dest_files=["res://.godot/imported/Hylics 2 OST Xeno Arcadia.mp3-b3997309dbe1d7f90e652fba7fdf296b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

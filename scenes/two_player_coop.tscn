@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsjvs3rju5r0v"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_6k55h"]
+[ext_resource type="PackedScene" uid="uid://bxhbqb8ylcbr" path="res://scenes/hud.tscn" id="2_ref4q"]
+[ext_resource type="AudioStream" uid="uid://be6634xak7mft" path="res://music/Scott Pilgrim vs The World The Game OST VS Nega Scott.mp3" id="3_5mjlt"]
+[ext_resource type="PackedScene" uid="uid://c2kcqxqc7gwih" path="res://scenes/levels/test_level.tscn" id="3_rui8c"]
+
+[node name="TwoPlayerCoop" type="Node2D" node_paths=PackedStringArray("current_level")]
+script = ExtResource("1_6k55h")
+current_level = NodePath("VBoxContainer/playerView/SubViewport/Test_Level")
+
+[node name="HUD" parent="." instance=ExtResource("2_ref4q")]
+is_coop_mode = true
+
+[node name="CoopTheme" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource("3_5mjlt")
+volume_db = -45.91
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_direction = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="playerView" type="SubViewportContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/playerView"]
+handle_input_locally = false
+audio_listener_enable_2d = true
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="VBoxContainer/playerView/SubViewport"]
+
+[node name="Test_Level" parent="VBoxContainer/playerView/SubViewport" instance=ExtResource("3_rui8c")]
+
+[connection signal="game_over" from="." to="HUD" method="_on_main_game_over"]
+[connection signal="increment_score" from="." to="HUD" method="_on_main_increment_score"]
+[connection signal="finished" from="HUD/CoopTheme" to="HUD" method="_on_music_finished"]
+[connection signal="character_left_bounds" from="VBoxContainer/playerView/SubViewport/Test_Level" to="." method="_on_world_boundary_body_exited"]

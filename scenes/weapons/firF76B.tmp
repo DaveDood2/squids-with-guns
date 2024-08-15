@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bymcqrfe7e0ym"]
+
+[ext_resource type="PackedScene" uid="uid://drnhbv0yvqulv" path="res://scenes/weapons/weapon.tscn" id="1_8o3v6"]
+[ext_resource type="Script" path="res://scripts/fireball.gd" id="2_6ioyv"]
+
+[node name="fireball" instance=ExtResource("1_8o3v6")]
+script = ExtResource("2_6ioyv")
+
+[node name="GunSprite" parent="." index="2"]
+animation = &"reloading"
+frame = 7
+frame_progress = 1.0
+
+[node name="equip" parent="SFX" index="1"]
+pitch_scale = 1.24

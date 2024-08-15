@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dunss7ay2cspq"]
+
+[ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/characters/squidSprites.png" id="1_mw74b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2742k"]
+atlas = ExtResource("1_mw74b")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu6u0"]
+atlas = ExtResource("1_mw74b")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj1b2"]
+atlas = ExtResource("1_mw74b")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufgb8"]
+atlas = ExtResource("1_mw74b")
+region = Rect2(0, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2742k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu6u0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj1b2")
+}],
+"loop": true,
+"name": &"hostile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufgb8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

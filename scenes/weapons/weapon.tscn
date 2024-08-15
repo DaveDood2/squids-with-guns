@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://drnhbv0yvqulv"]
+[gd_scene load_steps=22 format=3 uid="uid://drnhbv0yvqulv"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_hm042"]
 [ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="2_2x7sm"]
 [ext_resource type="Texture2D" uid="uid://k4r7oycdddjh" path="res://art/weapons/bananaGun.png" id="3_ivelc"]
 [ext_resource type="Texture2D" uid="uid://dbr8wn71rpoav" path="res://art/weapons/banana.png" id="4_3qf4s"]
 [ext_resource type="AudioStream" uid="uid://3mdsmvuu1d26" path="res://sfx/523687__bendyboi__suction-pop.wav" id="5_784q6"]
+[ext_resource type="AudioStream" uid="uid://bf4kibo6iv7ms" path="res://sfx/dig.wav" id="6_aca5d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmn6e"]
 atlas = ExtResource("3_ivelc")
@@ -115,6 +116,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y4wdo"]
+streams_count = 1
+random_pitch = 1.25
+random_volume_offset_db = 1.0
+stream_0/stream = ExtResource("5_784q6")
+stream_0/weight = 1.0
+
 [node name="weapon" type="Node2D" groups=["weapon"]]
 script = ExtResource("1_hm042")
 projectile_scene = ExtResource("2_2x7sm")
@@ -127,14 +135,21 @@ offset_bottom = 40.0
 
 [node name="GunSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_e1pit")
-animation = &"shooting"
+animation = &"idle"
 offset = Vector2(14, 3)
 
 [node name="BulletSpawnPoint" type="Node2D" parent="GunSprite"]
 position = Vector2(21, 0)
 
-[node name="GunSfx" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_784q6")
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="SFX"]
+stream = SubResource("AudioStreamRandomizer_y4wdo")
+volume_db = -8.254
+
+[node name="equip" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("6_aca5d")
+volume_db = -12.552
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="animation_finished" from="GunSprite" to="." method="_on_gun_sprite_animation_finished"]

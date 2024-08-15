@@ -1,22 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpdvjwncytche"]
+[gd_scene load_steps=9 format=3 uid="uid://bpdvjwncytche"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_mdp3u"]
 [ext_resource type="PackedScene" uid="uid://dunr2beyrvfp0" path="res://scenes/projectile.tscn" id="2_8ixyd"]
+[ext_resource type="SpriteFrames" uid="uid://bsx1oerxpk223" path="res://art/characters/spubb_sprites.tres" id="2_55pwi"]
 [ext_resource type="Theme" uid="uid://bc16eqpjmb17a" path="res://progress_bar_theme.tres" id="2_uirjt"]
 [ext_resource type="PackedScene" uid="uid://t6x1ne8soadk" path="res://scenes/aiming_reticle.tscn" id="3_o6duk"]
+[ext_resource type="PackedScene" uid="uid://fxq61yn2m12b" path="res://scenes/weapons/shotgun.tscn" id="4_1ipvp"]
 [ext_resource type="PackedScene" uid="uid://drnhbv0yvqulv" path="res://scenes/weapons/weapon.tscn" id="4_w873w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hk4p5"]
-radius = 6.0
-height = 13.334
+radius = 4.537
+height = 14.282
 
 [node name="Character" type="CharacterBody2D" groups=["Character"]]
 position = Vector2(6, -19)
 collision_layer = 0
 script = ExtResource("1_mdp3u")
+animations = ExtResource("2_55pwi")
 projectile_scene = ExtResource("2_8ixyd")
 aim_reticle_scene = ExtResource("3_o6duk")
-weapon_scene = ExtResource("4_w873w")
+weapons = Array[PackedScene]([ExtResource("4_1ipvp"), ExtResource("4_w873w")])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -37,3 +40,7 @@ target_position = Vector2(11, 0)
 
 [node name="WallClingLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-11, 0)
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="WeaponHolder" type="Node2D" parent="."]

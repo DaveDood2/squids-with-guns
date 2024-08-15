@@ -10,8 +10,17 @@ func _ready():
 	reload_time = 1.0 # Time in seconds before reload finished
 	spread = 0.5 # random spread of bullets in degrees
 	bullet_amount = 5 # how many bullets are fired concurrently per shot
-	speed = 350
+	speed = 400
 	speed_variance = 150
 	sway = 0.1
 	super._ready()
 	
+func draw_gun():
+	$GunSprite.look_at(aim_reticle.global_position)
+	var rot = rad_to_deg((aim_reticle.position - $GunSprite.position).angle())
+	if (rot >= -90 and rot <= 90):
+		$GunSprite.flip_v = 0
+		$GunSprite/BulletSpawnPoint.position.y = 0
+	else:
+		$GunSprite.flip_v = 1
+		$GunSprite/BulletSpawnPoint.position.y = 10

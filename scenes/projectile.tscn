@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dunr2beyrvfp0"]
+[gd_scene load_steps=8 format=3 uid="uid://dunr2beyrvfp0"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_mmrrr"]
 [ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/characters/squidSprites.png" id="2_guy2h"]
+[ext_resource type="AudioStream" uid="uid://dynnfj3mjdjqh" path="res://sfx/pistolHit.wav" id="3_7cskl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntwid"]
 
@@ -20,6 +21,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_flf43"]
+random_pitch = 1.49
+random_volume_offset_db = 0.36
+streams_count = 1
+stream_0/stream = ExtResource("3_7cskl")
+stream_0/weight = 1.0
+
 [node name="Projectile" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
 collision_layer = 0
@@ -33,3 +41,11 @@ shape = SubResource("CircleShape2D_ntwid")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_3psfl")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="HitTileSfx" type="AudioStreamPlayer2D" parent="SFX"]
+stream = SubResource("AudioStreamRandomizer_flf43")
+volume_db = -17.639
+
+[connection signal="finished" from="SFX/HitTileSfx" to="." method="_on_hit_tile_sfx_finished"]

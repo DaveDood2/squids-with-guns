@@ -1,16 +1,40 @@
 extends Node2D
 
-@export var navigation_region: NavigationRegion2D
-@export var tilemap: TileMap
-const EMPTY_TILE_COORDS = Vector2i(4, 5)
-const TILE_SIZE = 16.0
+@export var two_player_coop_scene : PackedScene
+@export var two_player_versus_scene : PackedScene
+@export var main_menu_scene : PackedScene
+@export var current_level : Node2D
 
 signal increment_score
 signal game_over
+signal player_died
+
+var playerCount = 2
+var livingPlayers = playerCount
+var credits_visible : bool = false
 
 func _ready():
-	pass
-	#build_navigation_region()
+	if (get_tree().current_scene.name == "Title Screen"):
+		return
+	get_viewport().transparent_bg = true
+	var world_2d = $VBoxContainer/playerView/SubViewport.world_2d
+	for player in range(1, playerCount + 1):
+		var currentPlayer = get_tree().get_nodes_in_group("level")[0].get_node("Player" + str(player))
+		if (player == 1):
+			currentPlayer.get_node("RemoteTransform2D").set_remote_node($VBoxContainer/playerView/SubViewport/Camera2D.get_path())
+		else: # player 2 and onwards...
+			var newPlayerView = SubViewportContainer.new()
+			newPlayerView.stretch = true
+			newPlayerView.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			var newSubViewport = SubViewport.new()
+			var newCamera = Camera2D.new()
+			newSubViewport.add_child(newCamera)
+			newSubViewport.world_2d = world_2d
+			newSubViewport.audio_listener_enable_2d = true
+			newPlayerView.add_child(newSubViewport)
+			$VBoxContainer.add_child(newPlayerView)
+			currentPlayer.get_node("RemoteTransform2D").set_remote_node(newCamera.get_path())
+
 
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
@@ -18,43 +42,47 @@ func _process(_delta):
 	if Input.is_action_just_pressed("debug_reload"):
 		print("[DEBUG] Reloaded scene!")
 		get_tree().reload_current_scene()
-	
-	
-func build_navigation_region():
-	var maps = NavigationServer2D.get_maps()
-	var regions_count = 0
-	for map in maps:
-		regions_count += 1
-		print("Map: ", map, " RIDS:", NavigationServer2D.map_get_regions(map))
-	print("Total regions: ", regions_count)
 		
-'''func build_navigation_region():
-	var navigation_outline = PackedVector2Array()
-	var navigation_polygon = NavigationPolygon.new()
-	for i in tilemap.get_used_cells(0):
-		if (tilemap.get_cell_atlas_coords(0, i) != EMPTY_TILE_COORDS):
-			# There is air here, add it to the navigation polygon region
-			var new_square = PackedVector2Array()
-			var square_center = to_global(tilemap.map_to_local(i))
-			new_square.append(square_center + Vector2(-TILE_SIZE/2, -TILE_SIZE/2))
-			new_square.append(square_center + Vector2(-TILE_SIZE/2, TILE_SIZE/2))
-			new_square.append(square_center + Vector2(TILE_SIZE/2, TILE_SIZE/2))
-			new_square.append(square_center + Vector2(TILE_SIZE/2, -TILE_SIZE/2))
-			#navigation_outline = Geometry2D.merge_polygons(navigation_outline, new_square)
-			navigation_polygon.add_outline(new_square)
-	navigation_polygon.make_polygons_from_outlines()
-	navigation_region.navigation_polygon = navigation_polygon
-	print("Polygons:", navigation_polygon.get_polygon_count())
-	return
-'''
-
+	if Input.is_action_just_pressed("debug_close_game"):
+		#if (get_tree().current_scene.name != "Title Screen"):
+			#get_tree().change_scene_to_packed(main_menu_scene)
+		#else:
+			print("[DEBUG] Closing game!")
+			get_tree().quit()
+	if Input.is_action_just_pressed("CloseCredits") and credits_visible:
+		$HelpAndCredits.hide()
+		$"Title UI".show()
+		credits_visible = false
+		
 
 
 func _on_world_boundary_body_exited(body):
 	if (body.is_in_group("Character")):
 		print("OOB:", body.name)
 		body.perish()
-		if (body.name == "Enemy"):
+		if (body.is_in_group("Enemy")):
 			increment_score.emit()
-		if (body.name == "Player"):
-			game_over.emit()
+		if (body.is_in_group("Player")):
+			livingPlayers -= 1
+			player_died.emit(body.player_num)
+			if livingPlayers <= 0:
+				game_over.emit()
+			
+
+
+func _on_one_player_pressed():
+	get_tree().change_scene_to_packed(two_player_coop_scene)
+
+
+func _on_two_player_pressed():
+	get_tree().change_scene_to_packed(two_player_versus_scene)
+
+
+func _on_credits_help_pressed():
+	$HelpAndCredits.show()
+	$"Title UI".hide()
+	credits_visible = true
+
+
+func _on_exit_game_pressed():
+	get_tree().quit()
