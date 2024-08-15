@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://b2xsd28nlabbw"]
+[gd_scene load_steps=24 format=3 uid="uid://b2xsd28nlabbw"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_h4hxk"]
+[ext_resource type="PackedScene" uid="uid://dsjvs3rju5r0v" path="res://scenes/two_player_coop.tscn" id="2_1l30o"]
 [ext_resource type="Texture2D" uid="uid://bjcdlo4abbqay" path="res://art/Tileset.png" id="2_ss5se"]
 [ext_resource type="PackedScene" uid="uid://b3gavv3focdi6" path="res://scenes/main.tscn" id="2_wlq3e"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="3_qwt5o"]
@@ -618,7 +619,8 @@ size = Vector2(112.332, 340.302)
 
 [node name="Title Screen" type="Node2D" groups=["level"]]
 script = ExtResource("1_h4hxk")
-two_player_scene = ExtResource("2_wlq3e")
+two_player_coop_scene = ExtResource("2_1l30o")
+two_player_versus_scene = ExtResource("2_wlq3e")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -721,7 +723,7 @@ grow_vertical = 2
 [node name="One Player" type="Button" parent="Title UI"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "1 Player Game
+text = "2 Player Co-op
 "
 
 [node name="Two Player" type="Button" parent="Title UI"]

@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var team = NO_TEAM # This character's team (e.g., teamed characters can't usually hurt each other)
 
 signal die
+signal perished
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
@@ -67,6 +68,8 @@ func is_touching_wall():
 	return false
 
 func attack(emit_position = self.global_position):
+	if not is_in_group("Living"):
+		return attack_cooldown
 	selected_weapon.shoot(emit_position)
 	attack_cooldown = selected_weapon.cooldown
 	return attack_cooldown
@@ -76,9 +79,20 @@ func take_damage(damage_amount):
 	health_bar.value = health
 	if (health <= 0):
 		play_death_animation()
+	else:
+		var tween = get_tree().create_tween()
+		tween.tween_property($AnimatedSprite2D, "modulate", Color.DEEP_PINK, 0.01)
+		tween.tween_callback(clear_hit_effect)
+	
+
+func clear_hit_effect():
+	var tween = get_tree().create_tween()
+	tween.tween_property($AnimatedSprite2D, "modulate", Color.WHITE, 0.1)
+
 	
 func play_death_animation():
 	perish()
+	perished.emit(self)
 	
 func perish():
 	if (is_instance_valid(aim_reticle)):

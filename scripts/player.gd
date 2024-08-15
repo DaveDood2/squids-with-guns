@@ -52,3 +52,10 @@ func _physics_process(delta):
 	if (Input.is_action_just_pressed("prev_weapon"+_pNum)):
 		prev_weapon()
 	
+func play_death_animation():
+	remove_from_group("Living")
+	$SFX/death.play()
+	var tween = get_tree().create_tween()
+	tween.tween_property($AnimatedSprite2D, "modulate", Color.RED, 1)
+	tween.tween_property($AnimatedSprite2D, "scale", Vector2(), 1)
+	tween.tween_callback(perish)

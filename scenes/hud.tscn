@@ -6,9 +6,35 @@
 script = ExtResource("1_yesf0")
 
 [node name="Score" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Game_Over" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+visible = false
+offset_top = 35.0
+offset_right = 92.0
+offset_bottom = 58.0
+text = "Game Over!"
+
+[node name="Player1Victory" type="Label" parent="."]
+visible = false
+offset_top = 35.0
+offset_right = 92.0
+offset_bottom = 58.0
+text = "Player 1 Wins!"
+
+[node name="Player2Victory" type="Label" parent="."]
+visible = false
+offset_top = 35.0
+offset_right = 92.0
+offset_bottom = 58.0
+text = "Player 2 Wins!"
+
+[node name="RestartPrompt" type="Label" parent="."]
+visible = false
+offset_left = -1.0
+offset_top = 101.0
+offset_right = 255.0
+offset_bottom = 124.0
+text = "Press F5 to restart, or ESC to exit."

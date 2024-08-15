@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2kcqxqc7gwih"]
+[gd_scene load_steps=9 format=3 uid="uid://c2kcqxqc7gwih"]
 
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_fqeqt"]
 [ext_resource type="PackedScene" uid="uid://dtmumrb38daei" path="res://scenes/enemy.tscn" id="2_mfnna"]
 [ext_resource type="PackedScene" uid="uid://3i585uceg2gk" path="res://scenes/enemy_spawner.tscn" id="3_j3415"]
 [ext_resource type="PackedScene" uid="uid://ec4nu6wf50l7" path="res://scenes/player.tscn" id="4_ydyxg"]
@@ -17,13 +18,14 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 cell_size = 16.0
 
 [node name="Test_Level" type="Node2D" groups=["level"]]
+script = ExtResource("1_fqeqt")
 
 [node name="Enemy" parent="." instance=ExtResource("2_mfnna")]
 position = Vector2(839, 70)
 team = "Enemy"
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_j3415")]
-position = Vector2(112, 523)
+position = Vector2(-4, -317)
 
 [node name="WorldBoundary" type="Area2D" parent="."]
 position = Vector2(0, 649)
@@ -42,12 +44,12 @@ metadata/_edit_lock_ = true
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_21mq5")
 
-[node name="Player1" parent="." groups=["Living"] instance=ExtResource("4_ydyxg")]
+[node name="Player1" parent="." instance=ExtResource("4_ydyxg")]
 position = Vector2(416, -19)
 animations = ExtResource("5_x8g4g")
 team = "Player"
 
-[node name="Player2" parent="." groups=["Living"] instance=ExtResource("4_ydyxg")]
+[node name="Player2" parent="." instance=ExtResource("4_ydyxg")]
 position = Vector2(381, -19)
 player_num = 2
 animations = ExtResource("5_x8g4g")
@@ -65,3 +67,5 @@ layer_2/z_index = 10
 layer_2/tile_data = PackedInt32Array()
 
 [connection signal="die" from="Enemy" to="EnemySpawner" method="_on_main_increment_score"]
+[connection signal="enemy_spawned" from="EnemySpawner" to="." method="_on_enemy_spawner_enemy_spawned"]
+[connection signal="body_exited" from="WorldBoundary" to="." method="_on_world_boundary_body_exited"]

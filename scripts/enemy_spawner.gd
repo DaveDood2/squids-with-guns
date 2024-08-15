@@ -1,5 +1,6 @@
 extends Path2D
 
+signal enemy_spawned(enemy)
 
 var move_speed = 100
 @export var enemy: PackedScene
@@ -9,10 +10,6 @@ var spawn_frequency_modifier := 0.8
 var current_spawn_time := 0.0
 var spawner_active = false
 var active_enemies := 1
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,8 +26,10 @@ func _process(delta):
 func spawn_enemy():
 	print("A new spubb is born")
 	var new_enemy = enemy.instantiate()
-	new_enemy.position = $PathFollow2D.position
-	get_tree().get_current_scene().add_child(new_enemy)
+	new_enemy.position = $PathFollow2D.global_position
+	
+	get_parent().add_child(new_enemy)
+	enemy_spawned.emit(new_enemy)
 
 
 func _on_main_increment_score():

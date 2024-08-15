@@ -62,7 +62,7 @@ offset_bottom = 23.0
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="2"]
 path_desired_distance = 10.0
 target_desired_distance = 30.0
-path_max_distance = 200.0
+path_max_distance = 50.0
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0.247059, 0.639216, 1)
 

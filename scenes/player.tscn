@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ec4nu6wf50l7"]
+[gd_scene load_steps=12 format=3 uid="uid://ec4nu6wf50l7"]
 
 [ext_resource type="PackedScene" uid="uid://bpdvjwncytche" path="res://scenes/character.tscn" id="1_1ojei"]
 [ext_resource type="Texture2D" uid="uid://cfwbvjphdoynl" path="res://art/characters/squidSprites.png" id="2_ofvsl"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_un7ip"]
+[ext_resource type="AudioStream" uid="uid://b5do0fwqrg3v1" path="res://sfx/characters/spubb/spubb_pain/spubb_pain1.wav" id="4_off2a"]
+[ext_resource type="AudioStream" uid="uid://lr4rhbd7hvpq" path="res://sfx/characters/spubb/spubb_pain/spubb_pain2.wav" id="5_of7og"]
+[ext_resource type="AudioStream" uid="uid://b8vcfaklqjwam" path="res://sfx/characters/spubb/spubb_pain/spubb_pain3.wav" id="6_fe3ma"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hu743"]
 atlas = ExtResource("2_ofvsl")
@@ -33,7 +36,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" groups=["Player"] instance=ExtResource("1_1ojei")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fw1u8"]
+random_pitch = 1.29
+streams_count = 3
+stream_0/stream = ExtResource("4_off2a")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_of7og")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_fe3ma")
+stream_2/weight = 1.0
+
+[node name="Player" groups=["Living", "Player"] instance=ExtResource("1_1ojei")]
 position = Vector2(10, -19)
 collision_layer = 16
 script = ExtResource("2_un7ip")
@@ -61,5 +74,9 @@ target_position = Vector2(15, 0)
 [node name="WallClingLeft" parent="." index="4"]
 position = Vector2(0, 10)
 target_position = Vector2(-15, 0)
+
+[node name="death" type="AudioStreamPlayer2D" parent="SFX" index="0"]
+stream = SubResource("AudioStreamRandomizer_fw1u8")
+volume_db = -2.91
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="." index="7"]

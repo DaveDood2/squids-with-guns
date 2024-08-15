@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwtcfeg1htogm"]
+[gd_scene load_steps=7 format=3 uid="uid://dwtcfeg1htogm"]
 
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_jjb3b"]
 [ext_resource type="PackedScene" uid="uid://ec4nu6wf50l7" path="res://scenes/player.tscn" id="2_rf1g5"]
 [ext_resource type="SpriteFrames" uid="uid://dunss7ay2cspq" path="res://art/characters/squid_sprites.tres" id="3_l2jk8"]
 [ext_resource type="TileSet" uid="uid://djpbyrf7qvfad" path="res://resources/2_player_fight_level.tres" id="4_p7aef"]
@@ -9,6 +10,7 @@
 size = Vector2(112.332, 340.302)
 
 [node name="2_player_fight_level" type="Node2D" groups=["level"]]
+script = ExtResource("1_jjb3b")
 
 [node name="Background" parent="." instance=ExtResource("4_q8tf8")]
 visible = false
@@ -28,12 +30,12 @@ position = Vector2(12.6919, -539.113)
 scale = Vector2(1, 3.74193)
 shape = SubResource("RectangleShape2D_jkvnw")
 
-[node name="Player1" parent="." groups=["Living"] instance=ExtResource("2_rf1g5")]
+[node name="Player1" parent="." instance=ExtResource("2_rf1g5")]
 position = Vector2(251, 45)
 animations = ExtResource("3_l2jk8")
 team = "Player1"
 
-[node name="Player2" parent="." groups=["Living"] instance=ExtResource("2_rf1g5")]
+[node name="Player2" parent="." instance=ExtResource("2_rf1g5")]
 position = Vector2(-338, 40)
 collision_layer = 32
 player_num = 2
@@ -50,3 +52,5 @@ layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Air Objects"
 layer_2/z_index = 10
 layer_2/tile_data = PackedInt32Array()
+
+[connection signal="body_exited" from="WorldBoundary" to="." method="_on_world_boundary_body_exited"]

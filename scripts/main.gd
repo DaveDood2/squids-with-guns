@@ -1,13 +1,17 @@
 extends Node2D
 
-@export var one_player_scene : PackedScene
-@export var two_player_scene : PackedScene
+@export var two_player_coop_scene : PackedScene
+@export var two_player_versus_scene : PackedScene
 @export var credits_scene : PackedScene
+@export var main_menu_scene : PackedScene
+@export var current_level : Node2D
 
 signal increment_score
 signal game_over
+signal player_died
 
 var playerCount = 2
+var livingPlayers = playerCount
 
 func _ready():
 	if (get_tree().current_scene.name == "Title Screen"):
@@ -31,6 +35,7 @@ func _ready():
 			$VBoxContainer.add_child(newPlayerView)
 			currentPlayer.get_node("RemoteTransform2D").set_remote_node(newCamera.get_path())
 
+
 # Called when the node enters the scene tree for the first time.
 func _process(_delta):
 	# Reload the scene
@@ -39,26 +44,34 @@ func _process(_delta):
 		get_tree().reload_current_scene()
 		
 	if Input.is_action_just_pressed("debug_close_game"):
-		print("[DEBUG] Closing game!")
-		get_tree().quit()
+		#if (get_tree().current_scene.name != "Title Screen"):
+			#get_tree().change_scene_to_packed(main_menu_scene)
+		#else:
+			print("[DEBUG] Closing game!")
+			get_tree().quit()
+		
+
 
 func _on_world_boundary_body_exited(body):
 	if (body.is_in_group("Character")):
-		#print("OOB:", body.name)
+		print("OOB:", body.name)
 		body.perish()
-		if (body.name == "Enemy"):
+		if (body.is_in_group("Enemy")):
 			increment_score.emit()
-		if (body.name == "Player"):
-			game_over.emit()
+		if (body.is_in_group("Player")):
+			livingPlayers -= 1
+			player_died.emit(body.player_num)
+			if livingPlayers <= 0:	
+				game_over.emit()
 			
 
 
 func _on_one_player_pressed():
-	get_tree().change_scene_to_packed(one_player_scene)
+	get_tree().change_scene_to_packed(two_player_coop_scene)
 
 
 func _on_two_player_pressed():
-	get_tree().change_scene_to_packed(two_player_scene)
+	get_tree().change_scene_to_packed(two_player_versus_scene)
 
 
 func _on_credits_help_pressed():
